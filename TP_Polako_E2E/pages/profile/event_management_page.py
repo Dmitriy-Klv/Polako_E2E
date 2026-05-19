@@ -1,6 +1,6 @@
 from TP_Polako_E2E.base.base_page import BasePage
 
-CREATE_EVENT_BTN = 'a[href*="/create"]'
+CREATE_EVENT_BTN = "flex-col gap-2"
 EVENT_ROW = '[data-testid="event-item"]'
 STATUS_LABEL = ".status-indicator"
 EDIT_ICON = "svg.edit-icon"

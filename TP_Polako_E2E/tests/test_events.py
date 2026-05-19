@@ -1,12 +1,7 @@
-import os
-
-from dotenv import load_dotenv
-
 from TP_Polako_E2E.pages.auth.login_page import LoginPage
 from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
 from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
 
-load_dotenv()
 
 
 def test_create_event_button_is_clickable(app_page):

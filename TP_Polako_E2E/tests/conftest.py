@@ -6,6 +6,10 @@ import pytest
 from dotenv import load_dotenv
 from playwright.sync_api import Page
 
+from TP_Polako_E2E.pages.auth.login_page import LoginPage
+from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
+from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
+
 ROOT_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -183,3 +187,13 @@ def pytest_runtest_makereport(
         path=str(screenshot_path),
         full_page=True,
     )
+
+
+@pytest.fixture(scope="function")
+def setup(request, app_page):
+
+    if request.cls is not None:
+        request.cls.page = app_page
+        request.cls.login_page = LoginPage(app_page)
+        request.cls.user_profile = UserProfilePage(app_page)
+        request.cls.events_list = EventsListPage(app_page)

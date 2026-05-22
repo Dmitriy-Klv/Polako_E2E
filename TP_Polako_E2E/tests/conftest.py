@@ -9,6 +9,7 @@ from playwright.sync_api import Page
 from TP_Polako_E2E.pages.auth.login_page import LoginPage
 from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
 from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
+from TP_Polako_E2E.pages.common.header import HeaderPage
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 
@@ -197,3 +198,4 @@ def setup(request, app_page):
         request.cls.login_page = LoginPage(app_page)
         request.cls.user_profile = UserProfilePage(app_page)
         request.cls.events_list = EventsListPage(app_page)
+        request.cls.header_page = HeaderPage(app_page)

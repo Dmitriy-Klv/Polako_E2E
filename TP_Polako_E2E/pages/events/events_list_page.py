@@ -4,7 +4,7 @@ EVENT_CARD = '[data-testid="event-card"]'
 EVENT_TITLE = ".event-card__title"
 FILTER_BUTTON = "button.filters-trigger"
 SEARCH_INPUT = 'input[placeholder*="search"]'
-CREATE_EVENT_BTN = "a[href$='/user/events/create"
+CREATE_EVENT_BTN = "btn-accent w-60 text-center"
 
 
 class EventsListPage(BasePage):

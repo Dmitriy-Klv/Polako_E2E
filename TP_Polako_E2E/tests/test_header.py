@@ -1,10 +1,10 @@
 import pytest
-
 from playwright.sync_api import expect
 
 from TP_Polako_E2E.base.base_test import BaseTest
 from TP_Polako_E2E.pages.common.header import CONTACT_LINKS
 from TP_Polako_E2E.utils.constants import expected_markers, sections_mapping
+
 
 class TestHeader(BaseTest):
 

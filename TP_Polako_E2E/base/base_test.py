@@ -4,12 +4,12 @@ from urllib.parse import urlparse
 import pytest
 
 from TP_Polako_E2E.pages.auth.login_page import LoginPage
+from TP_Polako_E2E.pages.common.header import HeaderPage
 from TP_Polako_E2E.pages.events.event_edit_page import EventEditPage
 from TP_Polako_E2E.pages.events.event_management_page import EventManagementPage
 from TP_Polako_E2E.pages.events.event_preview_page import EventPreviewPage
 from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
 from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
-from TP_Polako_E2E.pages.common.header import HeaderPage
 
 
 class BaseTest:
@@ -27,6 +27,10 @@ class BaseTest:
         self.events_list = EventsListPage(app_page)
         self.profile_api = authorized_profile_api
         self.api_token = api_auth_token
+        self.header_page = HeaderPage(app_page)
+        self.event_preview_page = EventPreviewPage(app_page)
+        self.event_edit_page = EventEditPage(app_page)
+        self.event_management_page = EventManagementPage(app_page)
 
     def authenticate_via_token(self) -> UserProfilePage:
         raw_url = os.getenv("STG_URL")

@@ -1,6 +1,9 @@
 import pytest
 
 from TP_Polako_E2E.pages.auth.login_page import LoginPage
+from TP_Polako_E2E.pages.events.event_edit_page import EventEditPage
+from TP_Polako_E2E.pages.events.event_management_page import EventManagementPage
+from TP_Polako_E2E.pages.events.event_preview_page import EventPreviewPage
 from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
 from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
 from TP_Polako_E2E.pages.common.header import HeaderPage
@@ -18,4 +21,7 @@ class BaseTest:
         self.login_page = LoginPage(app_page)
         self.user_profile = UserProfilePage(app_page)
         self.events_list = EventsListPage(app_page)
+        self.event_edit_page = EventEditPage(app_page)
+        self.event_preview_page = EventPreviewPage(app_page)
+        self.event_management_page = EventManagementPage(app_page)
         self.header_page = HeaderPage(app_page)

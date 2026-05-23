@@ -28,7 +28,6 @@ class TestEvent(BaseTest):
         self.events_list.fill_title_field("test_event")
         self.events_list.fill_description_field("test_description")
 
-
         self.events_list.select_current_date()
         self.events_list.fill_duration_field("60")
 

@@ -4,8 +4,12 @@ from urllib.parse import urlparse
 import pytest
 
 from TP_Polako_E2E.pages.auth.login_page import LoginPage
+from TP_Polako_E2E.pages.events.event_edit_page import EventEditPage
+from TP_Polako_E2E.pages.events.event_management_page import EventManagementPage
+from TP_Polako_E2E.pages.events.event_preview_page import EventPreviewPage
 from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
 from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
+from TP_Polako_E2E.pages.common.header import HeaderPage
 
 
 class BaseTest:
@@ -13,6 +17,7 @@ class BaseTest:
     user_profile: UserProfilePage
     events_list: EventsListPage
     api_token: str
+    header_page: HeaderPage
 
     @pytest.fixture(autouse=True)
     def setup_pages(self, app_page, authorized_profile_api, api_auth_token):
@@ -44,3 +49,7 @@ class BaseTest:
         self.page.wait_for_load_state("networkidle")
 
         return self.user_profile
+        self.event_edit_page = EventEditPage(app_page)
+        self.event_preview_page = EventPreviewPage(app_page)
+        self.event_management_page = EventManagementPage(app_page)
+        self.header_page = HeaderPage(app_page)

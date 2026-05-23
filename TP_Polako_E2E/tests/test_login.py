@@ -8,3 +8,6 @@ class TestLogin(BaseTest):
         self.login_page.click_profile()
 
         self.user_profile.verify_logout_button_visible()
+
+    def test_access_internal_page_without_ui_login(self, authenticated_page):
+        self.user_profile.verify_logout_button_visible()

@@ -1,29 +1,31 @@
 from TP_Polako_E2E.base.base_page import BasePage
 
 USER_SIDEBAR_LINKS = {
-    "profile": 'aside a:has-text("Профиль")',
-    "purchase_history": 'aside a:has-text("История покупок")',
-    "balance": 'aside a:has-text("Баланс")'
+    "profile": 'nav a[href*="personal-information"]',
+    "purchase_history": 'nav a[href*="purchases"]',
+    "balance": 'nav a[href*="balance"]',
 }
 
-USER_ROLE_BADGE = 'span:has-text("Пользователь")'
-LOGOUT_BTN = 'button:has-text("Выйти")'
+USER_ROLE_BADGE = "nav ~ div div.gap-1 span"
+LOGOUT_BTN = "main div.rounded-2xl button"
 EXIT_BTN = "//button[@type='button' and @data-slot='button']"
 
-INFO_CONTAINER = 'div:has-text("Основная информация")'
-FIRST_NAME_INPUT = 'div:has-text("Основная информация") ~ div div:nth-child(1) input'
-LAST_NAME_INPUT = 'div:has-text("Основная информация") ~ div div:nth-child(2) input'
+BASIC_INFO = "form:has(#first_name) > p:nth-of-type(1)"
+FIRST_NAME_INPUT = "#first_name"
+LAST_NAME_INPUT = "#last_name"
 
-EMAIL_INPUT = 'input[type="email"]'
-PHONE_INPUT = 'input[type="tel"]'
-INSTAGRAM_INPUT = 'div:has-text("Контактная информация") ~ div div:nth-child(3) input'
-TELEGRAM_INPUT = 'div:has-text("Контактная информация") ~ div div:nth-child(4) input'
+CONTACT_INFO = "form:has(#first_name) > p:nth-of-type(2)"
+EMAIL_INPUT = "#email"
+PHONE_INPUT = "#phone"
+INSTAGRAM_INPUT = "#instagram"
+TELEGRAM_INPUT = "#telegram"
 
-SAVE_PROFILE_BTN = 'button:has-text("Сохранить")'
+SAVE_PROFILE_BTN = 'form:has(#first_name) button[type="submit"]'
 
-NEW_PASSWORD_INPUT = 'input[placeholder="Введите новый пароль"]'
-CONFIRM_PASSWORD_INPUT = 'input[placeholder="Подтвердите пароль"]'
-CHANGE_PASSWORD_BTN = 'button:has-text("Изменить пароль")'
+CHANGE_PASSWORD = "main form:nth-of-type(2) > p"
+NEW_PASSWORD_INPUT = "#new_password"
+CONFIRM_PASSWORD_INPUT = "#confirm_password"
+CHANGE_PASSWORD_BTN = 'main form:nth-of-type(2) button[type="submit"]'
 
 EVENT_MNG_BTN = 'a[href="/ru/user/events"]'
 
@@ -55,8 +57,14 @@ class UserProfilePage(BasePage):
         self.page.locator(LOGOUT_BTN).wait_for(state="visible", timeout=4000)
 
     # MANAGE PROFILE
-    def fill_all_profile_fields(self, const_first_name: str, const_last_name: str, const_phone: str,
-                                const_instagram: str, const_telegram: str):
+    def fill_all_profile_fields(
+        self,
+        const_first_name: str,
+        const_last_name: str,
+        const_phone: str,
+        const_instagram: str,
+        const_telegram: str,
+    ):
         if const_first_name:
             self.page.locator(FIRST_NAME_INPUT).fill(const_first_name)
         if const_last_name:

@@ -95,7 +95,7 @@ def browser_type_launch_args(
             "HEADLESS",
             "false",
         ).lower()
-        == "true",  # true
+        == "false",  # true
     }
 
 
@@ -230,12 +230,3 @@ def authenticated_page(app_page, api_auth_session):
     app_page.wait_for_load_state("networkidle")
 
     return app_page
-    if request.cls is not None:
-        request.cls.page = app_page
-        request.cls.login_page = LoginPage(app_page)
-        request.cls.user_profile = UserProfilePage(app_page)
-        request.cls.events_list = EventsListPage(app_page)
-        request.cls.events_edit_page = EventEditPage(app_page)
-        request.cls.event_preview_page = EventPreviewPage(app_page)
-        request.cls.event_management_page = EventManagementPage(app_page)
-        request.cls.header_page = HeaderPage(app_page)

@@ -56,7 +56,3 @@ class BaseTest:
         self.page.wait_for_load_state("networkidle")
 
         return self.user_profile
-        self.event_edit_page = EventEditPage(app_page)
-        self.event_preview_page = EventPreviewPage(app_page)
-        self.event_management_page = EventManagementPage(app_page)
-        self.header_page = HeaderPage(app_page)

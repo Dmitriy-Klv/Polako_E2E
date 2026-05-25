@@ -24,6 +24,8 @@ class BaseTest:
     api_token: str
     header_page: HeaderPage
     forgot_password_page: ForgotPasswordPage
+    registration_page: RegistrationPage
+    forgot_password_page: ForgotPasswordPage
 
     @pytest.fixture(autouse=True)
     def setup_pages(self, app_page, authorized_profile_api, api_auth_token):
@@ -37,6 +39,8 @@ class BaseTest:
         self.event_preview_page = EventPreviewPage(app_page)
         self.event_edit_page = EventEditPage(app_page)
         self.event_management_page = EventManagementPage(app_page)
+        self.forgot_password_page = ForgotPasswordPage(app_page)
+        self.registration_page = RegistrationPage(app_page)
         self.forgot_password_page = ForgotPasswordPage(app_page)
 
     def authenticate_via_token(self) -> UserProfilePage:

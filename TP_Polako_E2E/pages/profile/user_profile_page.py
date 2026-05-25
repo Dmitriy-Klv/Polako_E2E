@@ -126,7 +126,7 @@ class UserProfilePage(BasePage):
             "email": self.fill_email,
             "phone": self.fill_phone,
             "instagram": self.fill_instagram,
-            "telegram": self.fill_telegram
+            "telegram": self.fill_telegram,
         }
 
         for key, fill_func in fill_methods.items():
@@ -141,7 +141,7 @@ class UserProfilePage(BasePage):
             "email": self.get_email_value(),
             "phone": self.get_phone_value(),
             "instagram": self.get_instagram_value(),
-            "telegram": self.get_telegram_value()
+            "telegram": self.get_telegram_value(),
         }
 
     def click_save_profile(self):
@@ -157,14 +157,18 @@ class UserProfilePage(BasePage):
 
     # CONFIRM PASSWORD
     def verify_confirm_password_visible(self, timeout: int = 3000):
-        self.page.locator(CONFIRM_PASSWORD_INPUT).wait_for(state="visible", timeout=timeout)
+        self.page.locator(CONFIRM_PASSWORD_INPUT).wait_for(
+            state="visible", timeout=timeout
+        )
 
     def fill_confirm_password(self, value: str):
         self.page.locator(CONFIRM_PASSWORD_INPUT).fill(value)
 
     # BUTTON CHANGE PASSWORD
     def verify_change_password_btn_visible(self, timeout: int = 3000):
-        self.page.locator(CHANGE_PASSWORD_BTN).wait_for(state="visible", timeout=timeout)
+        self.page.locator(CHANGE_PASSWORD_BTN).wait_for(
+            state="visible", timeout=timeout
+        )
 
     def click_change_password(self):
         self.page.locator(CHANGE_PASSWORD_BTN).click()

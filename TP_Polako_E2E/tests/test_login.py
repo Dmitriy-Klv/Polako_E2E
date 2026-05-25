@@ -1,19 +1,11 @@
 from TP_Polako_E2E.base.base_test import BaseTest
-from TP_Polako_E2E.pages.auth.login_page import (
-    EMAIL_INPUT,
-    LOGIN_FORM,
-    LOGIN_SUBMIT_BTN,
-    PASSWORD_INPUT,
-)
-from TP_Polako_E2E.utils.constants import (
-    EMPTY_PASSWORD,
-    INVALID_PASSWORD,
-    SQL_INJECTION_PAYLOAD,
-    TEST_EMAIL,
-    UNREGISTERED_EMAIL,
-    VALID_TEST_PASSWORD,
-    XSS_PAYLOAD,
-)
+from TP_Polako_E2E.pages.auth.login_page import (EMAIL_INPUT, LOGIN_FORM,
+                                                 LOGIN_SUBMIT_BTN,
+                                                 PASSWORD_INPUT)
+from TP_Polako_E2E.utils.constants import (EMPTY_PASSWORD, INVALID_PASSWORD,
+                                           SQL_INJECTION_PAYLOAD, TEST_EMAIL,
+                                           UNREGISTERED_EMAIL,
+                                           VALID_TEST_PASSWORD, XSS_PAYLOAD)
 
 
 class TestLogin(BaseTest):

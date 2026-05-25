@@ -2,6 +2,7 @@ import os
 from urllib.parse import urlparse
 
 import pytest
+from TP_Polako_E2E.pages.auth.registration_page import RegistrationPage
 
 from TP_Polako_E2E.pages.auth.login_page import LoginPage
 from TP_Polako_E2E.pages.common.header import HeaderPage
@@ -21,6 +22,7 @@ class BaseTest:
     events_list: EventsListPage
     header_page: HeaderPage
     forgot_password_page: ForgotPasswordPage
+    registration_page: RegistrationPage
     manager_profile: ManagerProfilePage
     page = None
     event_preview_page: EventPreviewPage
@@ -38,6 +40,7 @@ class BaseTest:
         self.event_edit_page = EventEditPage(app_page)
         self.event_management_page = EventManagementPage(app_page)
         self.forgot_password_page = ForgotPasswordPage(app_page)
+        self.registration_page = RegistrationPage(app_page)
         self.manager_profile = ManagerProfilePage(app_page)
 
     def _authenticate_via_cookie(self, token: str):

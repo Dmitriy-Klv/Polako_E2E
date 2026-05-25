@@ -1,14 +1,13 @@
+from typing import Callable
+
 from TP_Polako_E2E.base.base_page import BasePage
 
-USER_SIDEBAR_LINKS = {
-    "profile": 'nav a[href*="personal-information"]',
-    "purchase_history": 'nav a[href*="purchases"]',
-    "balance": 'nav a[href*="balance"]',
-}
+PROFILE_TAB = 'nav a[href*="personal-information"]'
+PURCHASES_TAB = 'nav a[href*="purchases"]'
+BALANCE_TAB = 'nav a[href*="balance"]'
 
 USER_ROLE_BADGE = "nav ~ div div.gap-1 span"
 LOGOUT_BTN = "main div.rounded-2xl button"
-EXIT_BTN = "//button[@type='button' and @data-slot='button']"
 
 BASIC_INFO = "form:has(#first_name) > p:nth-of-type(1)"
 FIRST_NAME_INPUT = "#first_name"
@@ -27,24 +26,26 @@ NEW_PASSWORD_INPUT = "#new_password"
 CONFIRM_PASSWORD_INPUT = "#confirm_password"
 CHANGE_PASSWORD_BTN = 'main form:nth-of-type(2) button[type="submit"]'
 
-EVENT_MNG_BTN = 'a[href="/ru/user/events"]'
-
 
 class UserProfilePage(BasePage):
-    def verify_logout_button_visible(self):
-        self.verify_element_is_visible(selector=EXIT_BTN, element_name="Logout Button")
-
-    def click_event_management_link(self):
-        self.page.click(EVENT_MNG_BTN)
-
     # SIDEBAR
-    def click_sidebar_menu(self, menu_key: str):
-        selector = USER_SIDEBAR_LINKS[menu_key.lower()]
-        self.page.locator(selector).click()
+    def click_profile_tab(self):
+        self.page.locator(PROFILE_TAB).click()
 
-    def verify_sidebar_link_visible(self, menu_key: str):
-        selector = USER_SIDEBAR_LINKS[menu_key.lower()]
-        self.page.locator(selector).wait_for(state="visible", timeout=3000)
+    def click_purchase_history_tab(self):
+        self.page.locator(PURCHASES_TAB).click()
+
+    def click_balance_tab(self):
+        self.page.locator(BALANCE_TAB).click()
+
+    def verify_profile_tab_visible(self, timeout: int = 3000):
+        self.page.locator(PROFILE_TAB).wait_for(state="visible", timeout=timeout)
+
+    def verify_purchase_history_tab_visible(self, timeout: int = 3000):
+        self.page.locator(PURCHASES_TAB).wait_for(state="visible", timeout=timeout)
+
+    def verify_balance_tab_visible(self, timeout: int = 3000):
+        self.page.locator(BALANCE_TAB).wait_for(state="visible", timeout=timeout)
 
     # PROFILE INFORMATION
     def verify_user_role_badge(self):
@@ -53,37 +54,124 @@ class UserProfilePage(BasePage):
     def click_logout(self):
         self.page.locator(LOGOUT_BTN).click()
 
-    def verify_logout_button_visible2(self):
+    def verify_logout_button_visible(self):
         self.page.locator(LOGOUT_BTN).wait_for(state="visible", timeout=4000)
 
     # MANAGE PROFILE
-    def fill_all_profile_fields(
-        self,
-        const_first_name: str,
-        const_last_name: str,
-        const_phone: str,
-        const_instagram: str,
-        const_telegram: str,
-    ):
-        if const_first_name:
-            self.page.locator(FIRST_NAME_INPUT).fill(const_first_name)
-        if const_last_name:
-            self.page.locator(LAST_NAME_INPUT).fill(const_last_name)
-        if const_phone:
-            self.page.locator(PHONE_INPUT).fill(const_phone)
-        if const_instagram:
-            self.page.locator(INSTAGRAM_INPUT).fill(const_instagram)
-        if const_telegram:
-            self.page.locator(TELEGRAM_INPUT).fill(const_telegram)
+    # First Name
+    def verify_first_name_visible(self, timeout: int = 3000):
+        self.page.locator(FIRST_NAME_INPUT).wait_for(state="visible", timeout=timeout)
+
+    def fill_first_name(self, value: str):
+        self.page.locator(FIRST_NAME_INPUT).fill(value)
+
+    def get_first_name_value(self) -> str:
+        return self.page.locator(FIRST_NAME_INPUT).input_value()
+
+    # Last Name
+    def verify_last_name_visible(self, timeout: int = 3000):
+        self.page.locator(LAST_NAME_INPUT).wait_for(state="visible", timeout=timeout)
+
+    def fill_last_name(self, value: str):
+        self.page.locator(LAST_NAME_INPUT).fill(value)
+
+    def get_last_name_value(self) -> str:
+        return self.page.locator(LAST_NAME_INPUT).input_value()
+
+    # Email
+    def verify_email_visible(self, timeout: int = 3000):
+        self.page.locator(EMAIL_INPUT).wait_for(state="visible", timeout=timeout)
+
+    def fill_email(self, value: str):
+        self.page.locator(EMAIL_INPUT).fill(value)
 
     def get_email_value(self) -> str:
         return self.page.locator(EMAIL_INPUT).input_value()
+
+    # Phone
+    def verify_phone_visible(self, timeout: int = 3000):
+        self.page.locator(PHONE_INPUT).wait_for(state="visible", timeout=timeout)
+
+    def fill_phone(self, value: str):
+        self.page.locator(PHONE_INPUT).fill(value)
+
+    def get_phone_value(self) -> str:
+        return self.page.locator(PHONE_INPUT).input_value()
+
+    # Instagram
+    def verify_instagram_visible(self, timeout: int = 3000):
+        self.page.locator(INSTAGRAM_INPUT).wait_for(state="visible", timeout=timeout)
+
+    def fill_instagram(self, value: str):
+        self.page.locator(INSTAGRAM_INPUT).fill(value)
+
+    def get_instagram_value(self) -> str:
+        return self.page.locator(INSTAGRAM_INPUT).input_value()
+
+    # Telegram
+    def verify_telegram_visible(self, timeout: int = 3000):
+        self.page.locator(TELEGRAM_INPUT).wait_for(state="visible", timeout=timeout)
+
+    def fill_telegram(self, value: str):
+        self.page.locator(TELEGRAM_INPUT).fill(value)
+
+    def get_telegram_value(self) -> str:
+        return self.page.locator(TELEGRAM_INPUT).input_value()
+
+    # Full data
+    def fill_all_profile_fields(self, profile_data: dict[str, str]):
+        fill_methods: dict[str, Callable[[str], None]] = {
+            "first_name": self.fill_first_name,
+            "last_name": self.fill_last_name,
+            "email": self.fill_email,
+            "phone": self.fill_phone,
+            "instagram": self.fill_instagram,
+            "telegram": self.fill_telegram
+        }
+
+        for key, fill_func in fill_methods.items():
+            value = profile_data.get(key)
+            if value is not None:
+                fill_func(value)
+
+    def get_all_profile_values(self) -> dict:
+        return {
+            "first_name": self.get_first_name_value(),
+            "last_name": self.get_last_name_value(),
+            "email": self.get_email_value(),
+            "phone": self.get_phone_value(),
+            "instagram": self.get_instagram_value(),
+            "telegram": self.get_telegram_value()
+        }
 
     def click_save_profile(self):
         self.page.locator(SAVE_PROFILE_BTN).click()
 
     # CHANGE PASSWORD
-    def fill_and_submit_new_password(self, const_new_pass: str):
-        self.page.locator(NEW_PASSWORD_INPUT).fill(const_new_pass)
-        self.page.locator(CONFIRM_PASSWORD_INPUT).fill(const_new_pass)
+    # NEW PASSWORD
+    def verify_new_password_visible(self, timeout: int = 3000):
+        self.page.locator(NEW_PASSWORD_INPUT).wait_for(state="visible", timeout=timeout)
+
+    def fill_new_password(self, value: str):
+        self.page.locator(NEW_PASSWORD_INPUT).fill(value)
+
+    # CONFIRM PASSWORD
+    def verify_confirm_password_visible(self, timeout: int = 3000):
+        self.page.locator(CONFIRM_PASSWORD_INPUT).wait_for(state="visible", timeout=timeout)
+
+    def fill_confirm_password(self, value: str):
+        self.page.locator(CONFIRM_PASSWORD_INPUT).fill(value)
+
+    # BUTTON CHANGE PASSWORD
+    def verify_change_password_btn_visible(self, timeout: int = 3000):
+        self.page.locator(CHANGE_PASSWORD_BTN).wait_for(state="visible", timeout=timeout)
+
+    def click_change_password(self):
         self.page.locator(CHANGE_PASSWORD_BTN).click()
+
+    def change_password(self, new_pass: str, confirm_pass: str):
+        if new_pass is not None:
+            self.fill_new_password(new_pass)
+        if confirm_pass is not None:
+            self.fill_confirm_password(confirm_pass)
+        self.click_change_password()

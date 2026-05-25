@@ -9,14 +9,6 @@ from playwright.sync_api import Page
 
 from TP_Polako_E2E.api.auth_api import AuthApi
 from TP_Polako_E2E.api.profile_api import ProfileApi
-from TP_Polako_E2E.pages.auth.login_page import LoginPage
-from TP_Polako_E2E.pages.common.header import HeaderPage
-from TP_Polako_E2E.pages.events.event_edit_page import EventEditPage
-from TP_Polako_E2E.pages.events.event_management_page import \
-    EventManagementPage
-from TP_Polako_E2E.pages.events.event_preview_page import EventPreviewPage
-from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
-from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 
@@ -192,20 +184,44 @@ def pytest_runtest_makereport(
 
 
 @pytest.fixture(scope="session")
-def api_auth_session():
+def user_api_token():
+    base_url = os.getenv("STG_URL")
+    email = os.getenv("SIMPLE_USER_EMAIL")
+    password = os.getenv("SIMPLE_USER_PASSWORD")
+
+    auth_client = AuthApi(base_url)
+    return auth_client.login_and_save_token(email, password)
+
+
+@pytest.fixture(scope="session")
+def manager_api_token():
     base_url = os.getenv("STG_URL")
     email = os.getenv("VALID_EMAIL")
     password = os.getenv("VALID_PASSWORD")
 
     auth_client = AuthApi(base_url)
-    token = auth_client.login_and_save_token(email, password)
-
-    return {"token": token}
+    return auth_client.login_and_save_token(email, password)
 
 
 @pytest.fixture(scope="session")
-def api_auth_token(api_auth_session):
-    return api_auth_session["token"]
+def api_auth_token(manager_api_token):
+    return manager_api_token
+
+
+def _login_browser_with_token(app_page, token: str):
+    raw_url = os.getenv("STG_URL")
+    parsed = urlparse(raw_url)
+    clean_base_url = f"{parsed.scheme}://{parsed.netloc}"
+    domain = parsed.netloc
+
+    app_page.context.add_cookies([
+        {"name": "access_token", "value": token, "domain": domain, "path": "/"}
+    ])
+
+    target_url = f"{clean_base_url}/ru/user/personal-information"
+    app_page.goto(target_url)
+    app_page.wait_for_load_state("networkidle")
+    return app_page
 
 
 @pytest.fixture(scope="function")
@@ -214,28 +230,15 @@ def authorized_profile_api(api_auth_token, base_url):
 
 
 @pytest.fixture(scope="function")
-def authenticated_page(app_page, api_auth_session):
-    raw_url = os.getenv("STG_URL")
-    parsed = urlparse(raw_url)
-    clean_base_url = f"{parsed.scheme}://{parsed.netloc}"
-    domain = parsed.netloc
+def user_page(app_page, user_api_token):
+    return _login_browser_with_token(app_page, user_api_token)
 
-    token = api_auth_session["token"]
-    app_page.context.add_cookies(
-        [{"name": "access_token", "value": token, "domain": domain, "path": "/"}]
-    )
 
-    target_url = f"{clean_base_url}/ru/user/personal-information"
-    app_page.goto(target_url)
-    app_page.wait_for_load_state("networkidle")
+@pytest.fixture(scope="function")
+def manager_page(app_page, manager_api_token):
+    return _login_browser_with_token(app_page, manager_api_token)
 
-    return app_page
-    if request.cls is not None:
-        request.cls.page = app_page
-        request.cls.login_page = LoginPage(app_page)
-        request.cls.user_profile = UserProfilePage(app_page)
-        request.cls.events_list = EventsListPage(app_page)
-        request.cls.events_edit_page = EventEditPage(app_page)
-        request.cls.event_preview_page = EventPreviewPage(app_page)
-        request.cls.event_management_page = EventManagementPage(app_page)
-        request.cls.header_page = HeaderPage(app_page)
+
+@pytest.fixture(scope="function")
+def authenticated_page(manager_page):
+    return manager_page

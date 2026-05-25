@@ -13,6 +13,7 @@ PASSWORD_INPUT = 'input[name="password"]'
 LOGIN_SUBMIT_BTN = 'button[type="submit"]'
 ERROR_MESSAGE = ".text-center.text-2xl"
 PROFILE_BTN = 'div[class="ml-4 flex items-center justify-between gap-1.5 text-sm"]'
+FORGOT_PASSWORD_LINK = "form button[type='button']"
 
 
 class LoginPage(BasePage):
@@ -80,3 +81,6 @@ class LoginPage(BasePage):
     def fill_login_form(self, email: str, password: str):
         self.page.locator(EMAIL_INPUT).fill(email)
         self.page.locator(PASSWORD_INPUT).fill(password)
+
+    def click_forgot_password(self):
+        self.page.locator(FORGOT_PASSWORD_LINK).click()

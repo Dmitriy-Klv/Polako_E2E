@@ -1,4 +1,10 @@
 from pathlib import Path
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+EMAIL_ADDRESS = os.getenv("VALID_EMAIL")
+
 
 SECTIONS_MAPPING = {
     "events": "#events",
@@ -47,6 +53,7 @@ EVENT_TO_DELETE = EVENT_NAME
 ROOT_DIR = Path(__file__).resolve().parent.parent
 IMAGE_PATH = ROOT_DIR / "test_data" / "test_events_foto.png"
 TITLE_TEXT_RESULT = "The event title is empty."
+EXPECTED_EMAIL_FORMAT_ERROR_MESSAGE = "При обновлении пароля произошла ошибка. Попробуйте еще раз."
 
 VALID_PROFILE_DATA = {
     "first_name": "Ramses",

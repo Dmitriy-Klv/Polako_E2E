@@ -1,13 +1,13 @@
 from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
 
 # WARNING BANNER
-TOP_WARNING_BANNER = "main > div.bg-yellow-50, div:has-text('Завершите настройку')"  # Корректируй под точный класс
-FILL_DATA_BTN = "button:has-text('Заполнить данные')"
-CREATE_CONTRACT_BTN = "button:has-text('Создать договор')"
+TOP_WARNING_BANNER = 'div.bg-amber-50'
+FILL_DATA_BTN = 'div.bg-amber-50 a[href*="contract-data"]'
+CREATE_CONTRACT_BTN = 'div.bg-amber-50 a[href*="contracts"]'
 
 # BADGES
-ORGANIZER_ROLE_BADGE = "main div.gap-1 span:nth-of-type(1)"  # Бейдж "Менеджер"
-COMMISSION_BADGE = "main div.gap-1 span:nth-of-type(2)"      # Бейдж "Комиссия платформы..."
+MANAGER_ROLE_BADGE = 'main div.gap-1 > div > span:nth-of-type(1)'
+COMMISSION_BADGE = 'main div.gap-1 > div > span:nth-of-type(2)'
 
 # SIDEBAR
 COMPANY_BTN = 'nav a[href*="company"]'
@@ -15,7 +15,7 @@ MANAGE_EVENTS_BTN = 'nav a[href*="events"]'
 CONTRACT_DATA_BTN = 'nav a[href*="contract-data"]'  # Данные для договоров
 CONTRACTS_BTN = 'nav a[href*="contracts"]'          # Договоры
 REPORTS_BTN = 'nav a[href*="reports"]'              # Отчеты
-QR_CODE_BTN = 'nav a[href*="qr-code"]'              # Создать QR-код
+QR_CODE_BTN = 'nav a[href*="qr-generator"]'              # Создать QR-код
 WITHDRAW_BTN = 'nav a[href*="withdraw"]'            # Вывод средств
 PUBLICATIONS_BTN = 'nav a[href*="publications"]'    # Публикации
 MANAGE_BTN = 'nav a[href*="manage"]'                # Управление
@@ -24,7 +24,7 @@ MANAGE_BTN = 'nav a[href*="manage"]'                # Управление
 class ManagerProfilePage(UserProfilePage):
     # Badges
     def verify_user_role_badge(self):
-        self.page.locator(ORGANIZER_ROLE_BADGE).wait_for(state="visible", timeout=4000)
+        self.page.locator(MANAGER_ROLE_BADGE).wait_for(state="visible", timeout=4000)
 
     def verify_commission_badge_visible(self, timeout: int = 3000):
         self.page.locator(COMMISSION_BADGE).wait_for(state="visible", timeout=timeout)

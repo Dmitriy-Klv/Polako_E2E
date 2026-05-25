@@ -1,3 +1,5 @@
+from pathlib import Path
+
 sections_mapping = {
     "events": "#events",
     "prices": "pricing",
@@ -33,3 +35,14 @@ INVALID_EMAILS = [
     "test.gmail.com",
     "test@com",
 ]
+
+
+EVENT_NAME = "test_event"
+EVENT_DESCRIPTION = "test_description"
+EVENT_LOCATION = "Test Location (NS)"
+EVENT_DURATION = "60"
+EVENT_COST = "100"
+EVENT_TO_DELETE = EVENT_NAME
+ROOT_DIR = Path(__file__).resolve().parent.parent
+IMAGE_PATH = ROOT_DIR / "test_data" / "test_events_foto.png"
+TITLE_TEXT_RESULT = "The event title is empty."

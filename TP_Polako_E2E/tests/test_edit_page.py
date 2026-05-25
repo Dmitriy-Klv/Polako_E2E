@@ -1,5 +1,5 @@
 from TP_Polako_E2E.base.base_test import BaseTest
-from utils.constants import (EVENT_COST, EVENT_DESCRIPTION, EVENT_DURATION,
+from TP_Polako_E2E.utils.constants import (EVENT_COST, EVENT_DESCRIPTION, EVENT_DURATION,
                              EVENT_NAME, IMAGE_PATH, ROOT_DIR)
 
 

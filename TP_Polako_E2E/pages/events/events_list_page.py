@@ -24,7 +24,7 @@ VISIT_COST_FIELD = "form>section:nth-child(2)>div:nth-child(5)>div:nth-child(2) 
 LOCATION_FIELD = "form>section:nth-child(2)>div:nth-child(6)>div>div>div>input"
 UPLOAD_INPUT = 'input[type="file"]'
 SAVE_BUTTON = "form>div>div>button"
-# CREATE_EVENT_BTN = ".btn-accent.w-60.text-center"
+CREATE_EVENT_BTN = "btn-accent w-60 text-center"
 
 
 class EventsListPage(BasePage):

@@ -1,5 +1,3 @@
-from pathlib import Path
-
 sections_mapping = {
             "events": "#events",
             "prices": "pricing",
@@ -19,14 +17,3 @@ expected_markers = {
             "viber": "viber://chat",
             "whatsapp": "whatsapp.com"
         }
-
-
-event_name = "test_event"
-event_description ="test_description"
-event_location = "Test Location (NS)"
-event_duration = "60"
-event_cost = "100"
-event_to_delete = event_name
-ROOT_DIR = Path(__file__).resolve().parent.parent
-image_path = ROOT_DIR / "test_data" / "test_events_foto.png"
-title_text_result = "The event title is empty."

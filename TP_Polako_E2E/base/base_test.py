@@ -11,6 +11,7 @@ from TP_Polako_E2E.pages.events.event_management_page import \
 from TP_Polako_E2E.pages.events.event_preview_page import EventPreviewPage
 from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
 from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
+from TP_Polako_E2E.pages.profile.manager_profile_page import ManagerProfilePage
 
 
 class BaseTest:
@@ -32,6 +33,7 @@ class BaseTest:
         self.event_preview_page = EventPreviewPage(app_page)
         self.event_edit_page = EventEditPage(app_page)
         self.event_management_page = EventManagementPage(app_page)
+        self.manager_profile = ManagerProfilePage(app_page)
 
     def authenticate_via_token(self) -> UserProfilePage:
         raw_url = os.getenv("STG_URL")

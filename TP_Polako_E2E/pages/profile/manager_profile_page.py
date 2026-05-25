@@ -1,28 +1,25 @@
 from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
 
-# WARNING BANNER
 TOP_WARNING_BANNER = 'div.bg-amber-50'
 FILL_DATA_BTN = 'div.bg-amber-50 a[href*="contract-data"]'
 CREATE_CONTRACT_BTN = 'div.bg-amber-50 a[href*="contracts"]'
 
-# BADGES
 MANAGER_ROLE_BADGE = 'main div.gap-1 > div > span:nth-of-type(1)'
 COMMISSION_BADGE = 'main div.gap-1 > div > span:nth-of-type(2)'
 
-# SIDEBAR
 COMPANY_BTN = 'nav a[href*="company"]'
 MANAGE_EVENTS_BTN = 'nav a[href*="events"]'
-CONTRACT_DATA_BTN = 'nav a[href*="contract-data"]'  # Данные для договоров
-CONTRACTS_BTN = 'nav a[href*="contracts"]'          # Договоры
-REPORTS_BTN = 'nav a[href*="reports"]'              # Отчеты
-QR_CODE_BTN = 'nav a[href*="qr-generator"]'              # Создать QR-код
-WITHDRAW_BTN = 'nav a[href*="withdraw"]'            # Вывод средств
-PUBLICATIONS_BTN = 'nav a[href*="publications"]'    # Публикации
-MANAGE_BTN = 'nav a[href*="manage"]'                # Управление
+CONTRACT_DATA_BTN = 'nav a[href*="contract-data"]'
+CONTRACTS_BTN = 'nav a[href*="contracts"]'
+REPORTS_BTN = 'nav a[href*="reports"]'
+QR_CODE_BTN = 'nav a[href*="qr-generator"]'
+WITHDRAW_BTN = 'nav a[href*="withdraw"]'
+PUBLICATIONS_BTN = 'nav a[href*="publications"]'
+MANAGE_BTN = 'nav a[href*="manage"]'
 
 
 class ManagerProfilePage(UserProfilePage):
-    # Badges
+    # BADGES
     def verify_user_role_badge(self):
         self.page.locator(MANAGER_ROLE_BADGE).wait_for(state="visible", timeout=4000)
 
@@ -32,7 +29,7 @@ class ManagerProfilePage(UserProfilePage):
     def get_commission_text(self) -> str:
         return self.page.locator(COMMISSION_BADGE).text_content().strip()
 
-    # Warning Banner
+    # WARNING BANNER
     def verify_warning_banner_visible(self, timeout: int = 3000):
         self.page.locator(TOP_WARNING_BANNER).wait_for(state="visible", timeout=timeout)
 

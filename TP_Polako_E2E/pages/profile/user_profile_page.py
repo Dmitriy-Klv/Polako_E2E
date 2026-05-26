@@ -25,7 +25,6 @@ CHANGE_PASSWORD = "main form:nth-of-type(2) > p"
 NEW_PASSWORD_INPUT = "#new_password"
 CONFIRM_PASSWORD_INPUT = "#confirm_password"
 CHANGE_PASSWORD_BTN = 'main form:nth-of-type(2) button[type="submit"]'
-EVENT_MANAGEMENT_LINK = 'a[href="/ru/user/events"]'
 
 
 class UserProfilePage(BasePage):

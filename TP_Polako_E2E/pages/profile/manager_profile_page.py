@@ -1,11 +1,11 @@
 from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
 
-TOP_WARNING_BANNER = 'div.bg-amber-50'
+TOP_WARNING_BANNER = "div.bg-amber-50"
 FILL_DATA_BTN = 'div.bg-amber-50 a[href*="contract-data"]'
 CREATE_CONTRACT_BTN = 'div.bg-amber-50 a[href*="contracts"]'
 
-MANAGER_ROLE_BADGE = 'main div.gap-1 > div > span:nth-of-type(1)'
-COMMISSION_BADGE = 'main div.gap-1 > div > span:nth-of-type(2)'
+MANAGER_ROLE_BADGE = "main div.gap-1 > div > span:nth-of-type(1)"
+COMMISSION_BADGE = "main div.gap-1 > div > span:nth-of-type(2)"
 
 COMPANY_BTN = 'nav a[href*="company"]'
 MANAGE_EVENTS_BTN = 'nav a[href*="events"]'

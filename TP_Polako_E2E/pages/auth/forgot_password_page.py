@@ -1,10 +1,10 @@
-from utils.constants import EXPECTED_EMAIL_FORMAT_ERROR_MESSAGE
+from TP_Polako_E2E.utils.constants import EXPECTED_EMAIL_FORMAT_ERROR_MESSAGE
 
 from TP_Polako_E2E.base.base_page import BasePage
 
 RECOVERY_EMAIL_INPUT = 'input[name="email"]'
 SEND_BTN = "form button[type='submit']"
-EMAIL_FORMAT_ERROR_LOCATOR = "div.border-b p"
+EMAIL_FORMAT_ERROR_LOCATOR = "div.absolute.right-0 div.flex-col p.mt-3.text-base"
 SUCCESS_MODAL_TEXT = "header  p.text-center.text-base"
 
 

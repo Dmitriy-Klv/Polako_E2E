@@ -1,4 +1,5 @@
 import re
+import os
 import pytest
 
 from playwright.sync_api import expect
@@ -13,7 +14,9 @@ from TP_Polako_E2E.utils.constants import (
 
 
 class TestUserProfile(BaseUserTest):
+
     # ELEMENTS VISIBILITY
+
     def test_visibility_profile_sidebar_button(self):
         self.user_profile.verify_profile_btn_visible()
 
@@ -92,53 +95,55 @@ class TestUserProfile(BaseUserTest):
         assert actual_data["first_name"] == PARTIAL_PROFILE_DATA["first_name"]
         assert actual_data["last_name"] == ""
 
-    # def test_invalid_profile_data_validation(self):
-    #     self.user_profile.click_profile_btn()
-    #
-    #     self.user_profile.fill_all_profile_fields(INVALID_PROFILE_DATA)
-    #     self.user_profile.click_save_profile()
-    #
-    #     self.page.reload()
-    #     actual_data = self.user_profile.get_all_profile_values()
-    #     assert actual_data != INVALID_PROFILE_DATA, "The system saved critically invalid data!"
+    @pytest.mark.skip
+    def test_invalid_profile_data_validation(self):
+        self.user_profile.click_profile_btn()
+
+        self.user_profile.fill_all_profile_fields(INVALID_PROFILE_DATA)
+        self.user_profile.click_save_profile()
+
+        self.page.reload()
+        actual_data = self.user_profile.get_all_profile_values()
+        assert actual_data != INVALID_PROFILE_DATA, "The system saved critically invalid data!"
 
     # CHANGE PASSWORD
-    def test_successful_password_change(self, user_profile_page):
-        user_profile_page.click_profile_btn()
-        user_profile_page.verify_new_password_visible()
-        user_profile_page.verify_confirm_password_visible()
 
-        user_profile_page.change_password(
+    def test_successful_password_change(self):
+        self.user_profile.click_profile_btn()
+        self.user_profile.verify_new_password_visible()
+        self.user_profile.verify_confirm_password_visible()
+
+        self.user_profile.change_password(
             new_pass=VALID_NEW_PASSWORD,
             confirm_pass=VALID_NEW_PASSWORD,
             expected_status=200
         )
 
-        user_profile_page.change_password(
+        self.user_profile.change_password(
             new_pass=os.getenv("SIMPLE_USER_PASSWORD"),
             confirm_pass=os.getenv("SIMPLE_USER_PASSWORD"),
             expected_status=200
         )
 
-    def test_password_mismatch_error(self, user_profile_page):
-        user_profile_page.click_profile_btn()
+    def test_password_mismatch_error(self):
+        self.user_profile.click_profile_btn()
 
-        user_profile_page.change_password(
+        self.user_profile.change_password(
             new_pass=VALID_NEW_PASSWORD,
             confirm_pass=VALID_NEW_PASSWORD[::-1],
             expected_status=None
         )
 
-        error_message = user_profile_page.page.locator(".error-message-selector").text_content()
+        error_message = self.user_profile.page.locator(".error-message-selector").text_content()
         assert "The passwords do not match!" in error_message
 
-    def test_empty_password_submission_error(self, user_profile_page):
-        user_profile_page.click_profile_btn()
+    def test_empty_password_submission_error(self):
+        self.user_profile.click_profile_btn()
 
-        user_profile_page.change_password(
-            new_pass="",
-            confirm_pass="",
+        self.user_profile.change_password(
+            new_pass=INVALID_NEW_PASSWORD,
+            confirm_pass=INVALID_NEW_PASSWORD,
             expected_status=None
         )
 
-        assert user_profile_page.page.is_disabled("button.change-password-submit")
+        assert self.user_profile.page.is_disabled("button.change-password-submit")

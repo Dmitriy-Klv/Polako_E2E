@@ -1,6 +1,6 @@
 import os
-from pathlib import Path
 
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -27,7 +27,9 @@ EXPECTED_MARKERS = {
     "whatsapp": "whatsapp.com",
 }
 
+
 # LoginPage
+
 TEST_EMAIL = "test3@mail.com"
 INVALID_PASSWORD = "WrongPassword123"
 UNREGISTERED_EMAIL = "not_exist@test.com"
@@ -65,6 +67,7 @@ COMPANY_REGISTRATION_SUCCESS_MESSAGE = "Компания зарегистрир�
 COOL_BTN_TEXT = "Круто"
 SUCCESS_MODAL_MESSAGE = "Информация для смены пароля отправлена на"
 
+
 VALID_PROFILE_DATA = {
     "first_name": "Ramses",
     "last_name": "Fourth",
@@ -74,6 +77,7 @@ VALID_PROFILE_DATA = {
     "telegram": "@ram4"
 }
 
+
 PARTIAL_PROFILE_DATA = {
     "first_name": "Привет",
     "last_name": "",
@@ -82,6 +86,7 @@ PARTIAL_PROFILE_DATA = {
     "instagram": "",
     "telegram": "@hello"
 }
+
 
 INVALID_PROFILE_DATA = {
     "first_name": "932c- mv3c kmf in0 \[w [wld][mcna]чьэцуст0ш3ьц0ч3 932c- mv3c kmf in0 \[w [wld][mcna]чьэцуст0ш3ьц0ч3",
@@ -94,6 +99,7 @@ INVALID_PROFILE_DATA = {
     "instagram": """Пейзик!([#}{2@'%"/|^34*.,`~""",
     "telegram": "ауцтсту.92ьх3ь-!смзц@"
 }
+
 
 VALID_NEW_PASSWORD = 't1T!k@cK%'
 INVALID_NEW_PASSWORD = ''

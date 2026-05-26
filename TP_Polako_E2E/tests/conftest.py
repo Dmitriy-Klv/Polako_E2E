@@ -9,6 +9,13 @@ from playwright.sync_api import Page
 
 from TP_Polako_E2E.api.auth_api import AuthApi
 from TP_Polako_E2E.api.profile_api import ProfileApi
+from TP_Polako_E2E.pages.auth.login_page import LoginPage
+from TP_Polako_E2E.pages.common.header import HeaderPage
+from TP_Polako_E2E.pages.events.event_edit_page import EventEditPage
+from TP_Polako_E2E.pages.events.event_management_page import EventManagementPage
+from TP_Polako_E2E.pages.events.event_preview_page import EventPreviewPage
+from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
+from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 
@@ -87,7 +94,7 @@ def browser_type_launch_args(
             "HEADLESS",
             "false",
         ).lower()
-        == "false",  # true
+        == "true",  # true
     }
 
 

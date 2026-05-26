@@ -1,5 +1,9 @@
 from TP_Polako_E2E.base.base_test import BaseTest
-from TP_Polako_E2E.utils.constants import EMAIL_ADDRESS, INVALID_EMAILS
+from TP_Polako_E2E.utils.constants import (
+    EMAIL_ADDRESS,
+    INVALID_EMAILS,
+    EXPECTED_EMAIL_FORMAT_ERROR_MESSAGE,
+)
 
 
 class TestForgotPassword(BaseTest):

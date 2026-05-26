@@ -1,7 +1,10 @@
 import os
+import string
 
 from pathlib import Path
 from dotenv import load_dotenv
+import uuid
+import random
 
 load_dotenv()
 EMAIL_ADDRESS = os.getenv("VALID_EMAIL")
@@ -68,6 +71,25 @@ COOL_BTN_TEXT = "Круто"
 SUCCESS_MODAL_MESSAGE = "Информация для смены пароля отправлена на"
 
 
+def generate_random_email(domain: str = "test.com") -> str:
+    unique_id = uuid.uuid4().hex[:8]
+    return f"testuser_{unique_id}@{domain}"
+
+
+def generate_random_user_name() -> str:
+    unique_id = uuid.uuid4().hex[:6]
+    return f"TestUser_{unique_id}"
+
+
+def generate_random_company_name() -> str:
+    unique_id = uuid.uuid4().hex[:6]
+    return f"TestCompany_{unique_id}"
+
+
+def generate_random_password(length: int = 12) -> str:
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = "".join(random.choice(characters) for i in range(length))
+    return password
 VALID_PROFILE_DATA = {
     "first_name": "Ramses",
     "last_name": "Fourth",

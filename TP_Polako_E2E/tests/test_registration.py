@@ -17,6 +17,15 @@ from TP_Polako_E2E.base.base_test import BaseTest
 from TP_Polako_E2E.pages.auth.registration_page import (
     REGISTER_BTN,
     COMPANY_REGISTRATION_INFORM_MESSAGE,
+from TP_Polako_E2E.base.base_test import BaseTest
+from TP_Polako_E2E.pages.auth.registration_page import REGISTER_BTN
+from TP_Polako_E2E.utils.constants import (
+    EXPECTED_ERROR_TEXT_COMPANY_NAME,
+    LONG_COMPANY_NAME,
+    TEST_EMAIL,
+    TEST_NAME,
+    VALID_COMPANY_NAME,
+    VALID_TEST_PASSWORD,
 )
 
 

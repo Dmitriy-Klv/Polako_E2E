@@ -49,6 +49,13 @@ class ManagerProfilePage(UserProfilePage):
     def click_event_management_link(self):
         self.page.locator(MANAGE_EVENTS_BTN).click()
 
+    def force_click_event_management_link(self):
+        link = self.page.locator(MANAGE_EVENTS_BTN)
+        link.wait_for(state="visible", timeout=500)
+        for _ in range(5):
+            link.click(force=True)
+            self.page.wait_for_timeout(500)
+
     def verify_event_management_link_visible(self):
         self.page.locator(MANAGE_EVENTS_BTN).wait_for(state="visible")
 

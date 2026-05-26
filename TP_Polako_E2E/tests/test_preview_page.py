@@ -12,7 +12,7 @@ class TestPreviewPage(BaseTest):
         self.login_page.click_profile()
 
         self.user_profile.click_profile_btn()
-        self.user_profile.force_click_event_management_link()
+        self.manager_profile.force_click_event_management_link()
 
         self.events_list.create_event_btn_is_visible()
         self.events_list.click_create_event_btn()
@@ -33,7 +33,7 @@ class TestPreviewPage(BaseTest):
 
         self.event_preview_page.get_title_text()
         self.event_preview_page.is_image_visible()
-        self.user_profile.click_event_management_link()
+        self.manager_profile.click_event_management_link()
 
         assert len(self.event_preview_page.get_title_text()) > 0, TITLE_TEXT_RESULT
         assert (
@@ -47,8 +47,7 @@ class TestPreviewPage(BaseTest):
         self.user_profile.click_profile_btn()
 
         with self.page.context.expect_page() as new_page_info:
-            self.user_profile.force_click_event_management_link()
-
+            self.manager_profile.click_event_management_link()
         new_page = new_page_info.value
         new_page.wait_for_load_state()
 

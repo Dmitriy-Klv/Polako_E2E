@@ -39,18 +39,6 @@ class UserProfilePage(BasePage):
     def click_balance_btn(self):
         self.page.locator(BALANCE_BTN).click()
 
-    def click_event_management_link(self):
-        link = self.page.locator(EVENT_MANAGEMENT_LINK)
-        link.wait_for(state="visible", timeout=2000)
-        link.click(force=True)
-
-    def force_click_event_management_link(self):
-        link = self.page.locator(EVENT_MANAGEMENT_LINK)
-        link.wait_for(state="visible", timeout=500)
-        for _ in range(5):
-            link.click(force=True)
-            self.page.wait_for_timeout(500)
-
     def verify_profile_btn_visible(self, timeout: int = 3000):
         self.page.locator(PROFILE_BTN).wait_for(state="visible", timeout=timeout)
 

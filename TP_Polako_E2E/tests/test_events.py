@@ -1,7 +1,12 @@
-from TP_Polako_E2E.utils.constants import (EVENT_COST, EVENT_DESCRIPTION, EVENT_DURATION,
-                             EVENT_LOCATION, EVENT_NAME, IMAGE_PATH)
-
 from TP_Polako_E2E.base.base_test import BaseTest
+from TP_Polako_E2E.utils.constants import (
+    EVENT_COST,
+    EVENT_DESCRIPTION,
+    EVENT_DURATION,
+    EVENT_LOCATION,
+    EVENT_NAME,
+    IMAGE_PATH,
+)
 
 
 class TestEvent(BaseTest):

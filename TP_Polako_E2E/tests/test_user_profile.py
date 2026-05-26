@@ -2,14 +2,16 @@ import re
 import os
 import pytest
 
+import pytest
 from playwright.sync_api import expect
+
 from TP_Polako_E2E.base.base_test import BaseUserTest
 from TP_Polako_E2E.utils.constants import (
-    VALID_PROFILE_DATA,
-    PARTIAL_PROFILE_DATA,
+    INVALID_NEW_PASSWORD,
     INVALID_PROFILE_DATA,
+    PARTIAL_PROFILE_DATA,
     VALID_NEW_PASSWORD,
-    INVALID_NEW_PASSWORD
+    VALID_PROFILE_DATA,
 )
 
 
@@ -80,8 +82,9 @@ class TestUserProfile(BaseUserTest):
         self.page.reload()
 
         actual_data = self.user_profile.get_all_profile_values()
-        assert actual_data == VALID_PROFILE_DATA, \
-            f"It was expected {VALID_PROFILE_DATA}, but it appears in the UI {actual_data}."
+        assert (
+            actual_data == VALID_PROFILE_DATA
+        ), f"It was expected {VALID_PROFILE_DATA}, but it appears in the UI {actual_data}."
 
     def test_partial_profile_update_and_field_clearing(self):
         self.user_profile.click_profile_btn()
@@ -116,13 +119,13 @@ class TestUserProfile(BaseUserTest):
         self.user_profile.change_password(
             new_pass=VALID_NEW_PASSWORD,
             confirm_pass=VALID_NEW_PASSWORD,
-            expected_status=200
+            expected_status=200,
         )
 
         self.user_profile.change_password(
             new_pass=os.getenv("SIMPLE_USER_PASSWORD"),
             confirm_pass=os.getenv("SIMPLE_USER_PASSWORD"),
-            expected_status=200
+            expected_status=200,
         )
 
     def test_password_mismatch_error(self):
@@ -131,15 +134,20 @@ class TestUserProfile(BaseUserTest):
         self.user_profile.change_password(
             new_pass=VALID_NEW_PASSWORD,
             confirm_pass=VALID_NEW_PASSWORD[::-1],
-            expected_status=None
+            expected_status=None,
         )
 
+        error_message = user_profile_page.page.locator(
+            ".error-message-selector"
+        ).text_content()
         error_message = self.user_profile.page.locator(".error-message-selector").text_content()
         assert "The passwords do not match!" in error_message
 
     def test_empty_password_submission_error(self):
         self.user_profile.click_profile_btn()
 
+        user_profile_page.change_password(
+            new_pass="", confirm_pass="", expected_status=None
         self.user_profile.change_password(
             new_pass=INVALID_NEW_PASSWORD,
             confirm_pass=INVALID_NEW_PASSWORD,

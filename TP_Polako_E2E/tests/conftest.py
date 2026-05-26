@@ -214,9 +214,9 @@ def _login_browser_with_token(app_page, token: str):
     clean_base_url = f"{parsed.scheme}://{parsed.netloc}"
     domain = parsed.netloc
 
-    app_page.context.add_cookies([
-        {"name": "access_token", "value": token, "domain": domain, "path": "/"}
-    ])
+    app_page.context.add_cookies(
+        [{"name": "access_token", "value": token, "domain": domain, "path": "/"}]
+    )
 
     target_url = f"{clean_base_url}/ru/user/personal-information"
     app_page.goto(target_url)

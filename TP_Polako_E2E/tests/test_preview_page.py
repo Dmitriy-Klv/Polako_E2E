@@ -1,8 +1,13 @@
-from TP_Polako_E2E.utils.constants import (EVENT_COST, EVENT_DESCRIPTION, EVENT_DURATION,
-                             EVENT_LOCATION, EVENT_NAME, IMAGE_PATH,
-                             TITLE_TEXT_RESULT)
-
 from TP_Polako_E2E.base.base_test import BaseTest
+from TP_Polako_E2E.utils.constants import (
+    EVENT_COST,
+    EVENT_DESCRIPTION,
+    EVENT_DURATION,
+    EVENT_LOCATION,
+    EVENT_NAME,
+    IMAGE_PATH,
+    TITLE_TEXT_RESULT,
+)
 
 
 class TestPreviewPage(BaseTest):
@@ -72,6 +77,8 @@ class TestPreviewPage(BaseTest):
         events_list_new.click_save_event_btn()
 
         assert len(event_preview_new.get_title_text()) > 0, TITLE_TEXT_RESULT
-        assert event_preview_new.is_image_visible(), "The event image is not displaying!"
+        assert (
+            event_preview_new.is_image_visible()
+        ), "The event image is not displaying!"
 
         new_page.close()

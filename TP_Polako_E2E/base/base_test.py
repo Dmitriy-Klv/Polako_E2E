@@ -2,18 +2,20 @@ import os
 from urllib.parse import urlparse
 
 import pytest
-from TP_Polako_E2E.pages.auth.registration_page import RegistrationPage
 
+from TP_Polako_E2E.pages.auth.forgot_password_page import ForgotPasswordPage
 from TP_Polako_E2E.pages.auth.login_page import LoginPage
+from TP_Polako_E2E.pages.auth.registration_page import RegistrationPage
 from TP_Polako_E2E.pages.common.header import HeaderPage
 from TP_Polako_E2E.pages.events.event_edit_page import EventEditPage
-from TP_Polako_E2E.pages.events.event_management_page import \
-    EventManagementPage
+from TP_Polako_E2E.pages.events.event_management_page import EventManagementPage
 from TP_Polako_E2E.pages.events.event_preview_page import EventPreviewPage
 from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
-from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
-from TP_Polako_E2E.pages.auth.forgot_password_page import ForgotPasswordPage
 from TP_Polako_E2E.pages.profile.manager_profile_page import ManagerProfilePage
+from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
+from TP_Polako_E2E.pages.ticket.checkout_page import CheckoutPage
+from TP_Polako_E2E.pages.ticket.payment_gateway_page import PaymentGatewayPage
+from TP_Polako_E2E.pages.ticket.ticket_selection_page import TicketSelectionPage
 
 
 class BaseTest:
@@ -28,6 +30,9 @@ class BaseTest:
     event_preview_page: EventPreviewPage
     event_edit_page: EventEditPage
     event_management_page: EventManagementPage
+    ticket_selection_page: TicketSelectionPage
+    checkout_page: CheckoutPage
+    payment_gateway_page: PaymentGatewayPage
 
     @pytest.fixture(autouse=True)
     def setup_pages(self, app_page):
@@ -42,6 +47,9 @@ class BaseTest:
         self.forgot_password_page = ForgotPasswordPage(app_page)
         self.registration_page = RegistrationPage(app_page)
         self.manager_profile = ManagerProfilePage(app_page)
+        self.ticket_selection_page = TicketSelectionPage(app_page)
+        self.checkout_page = CheckoutPage(app_page)
+        self.payment_gateway_page = PaymentGatewayPage(app_page)
 
     def _authenticate_via_cookie(self, token: str):
         raw_url = os.getenv("STG_URL")
@@ -49,18 +57,21 @@ class BaseTest:
         clean_base_url = f"{parsed.scheme}://{parsed.netloc}"
         domain = parsed.netloc
 
-        self.page.context.add_cookies([
-            {
-                "name": "access_token",
-                "value": token,
-                "domain": domain,
-                "path": "/",
-        }
-        ])
+        self.page.context.add_cookies(
+            [
+                {
+                    "name": "access_token",
+                    "value": token,
+                    "domain": domain,
+                    "path": "/",
+                }
+            ]
+        )
         self.page.goto(f"{clean_base_url}/ru/user/personal-information")
         self.page.wait_for_load_state("networkidle")
 
         return self.user_profile
+
 
 class BaseManagerTest(BaseTest):
     @pytest.fixture(autouse=True)

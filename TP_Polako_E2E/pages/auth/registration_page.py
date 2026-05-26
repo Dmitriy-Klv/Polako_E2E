@@ -1,7 +1,9 @@
-from TP_Polako_E2E.utils.constants import COMPANY_REGISTRATION_SUCCESS_MESSAGE, COOL_BTN_TEXT
-
 from TP_Polako_E2E.base.base_page import BasePage
 from TP_Polako_E2E.pages.auth.login_page import LOGIN_FORM
+from TP_Polako_E2E.utils.constants import (
+    COMPANY_REGISTRATION_SUCCESS_MESSAGE,
+    COOL_BTN_TEXT,
+)
 
 NO_ACCOUNT_BTN = "header div.absolute > form + button"
 ORGANIZER_TAB_BTN = "div.absolute.right-0 div.border-b button:nth-child(2)"

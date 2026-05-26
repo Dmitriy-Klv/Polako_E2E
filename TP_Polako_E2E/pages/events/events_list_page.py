@@ -4,7 +4,7 @@ EVENT_CARD = '[data-testid="event-card"]'
 EVENT_TITLE = ".event-card__title"
 FILTER_BUTTON = "button.filters-trigger"
 SEARCH_INPUT = 'input[placeholder*="search"]'
-CREATE_EVENT_BTN = 'btn-accent w-60 text-center'
+CREATE_EVENT_BTN = "btn-accent w-60 text-center"
 TITLE_FIELD = "form>section:nth-child(2)>div:nth-child(2)  input"
 DESCRIPTION_FIELD = "div[class*='w-md-editor-input'] textarea"
 CALENDAR_WIDGET_FIELD = 'input[icon="bg-phiCalendar"]'
@@ -24,7 +24,7 @@ VISIT_COST_FIELD = "form>section:nth-child(2)>div:nth-child(5)>div:nth-child(2) 
 LOCATION_FIELD = "form>section:nth-child(2)>div:nth-child(6)>div>div>div>input"
 UPLOAD_INPUT = 'input[type="file"]'
 SAVE_BUTTON = "form>div>div>button"
-
+ACTIVE_EVENT_CARD = ".swiper-slide-active a"
 
 
 class EventsListPage(BasePage):
@@ -40,7 +40,9 @@ class EventsListPage(BasePage):
 
     def create_event_btn_is_visible(self, timeout: int = 10000) -> bool:
         try:
-            self.page.locator(CREATE_EVENT_BTN).wait_for(state="visible", timeout=timeout)
+            self.page.locator(CREATE_EVENT_BTN).wait_for(
+                state="visible", timeout=timeout
+            )
             return True
         except:
             return False
@@ -95,3 +97,6 @@ class EventsListPage(BasePage):
 
     def click_save_event_btn(self):
         self.page.locator(SAVE_BUTTON).click()
+
+    def click_active_slider_event(self):
+        self.page.locator(ACTIVE_EVENT_CARD).first.click()

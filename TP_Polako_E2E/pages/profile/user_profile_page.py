@@ -146,11 +146,14 @@ class UserProfilePage(BasePage):
 
     def click_save_profile(self):
         with self.page.expect_response(
-                lambda response: "user" in response.url or "profile" in response.url) as response_info:
+            lambda response: "user" in response.url or "profile" in response.url
+        ) as response_info:
             self.page.click("button[type='submit']")
 
-        assert response_info.value.status in [200, 201], \
-            f"The backend returned an error while saving: {response_info.value.status}"
+        assert response_info.value.status in [
+            200,
+            201,
+        ], f"The backend returned an error while saving: {response_info.value.status}"
 
     # CHANGE PASSWORD
     # NEW PASSWORD

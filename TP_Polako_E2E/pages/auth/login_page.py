@@ -44,7 +44,9 @@ class LoginPage(BasePage):
     def click_login_button(self):
         self.page.locator(LOGIN_SUBMIT_BTN).click()
 
-    def get_credentials(self, email_key: str = "VALID_EMAIL", password_key: str = "VALID_PASSWORD") -> tuple[str, str]:
+    def get_credentials(
+        self, email_key: str = "VALID_EMAIL", password_key: str = "VALID_PASSWORD"
+    ) -> tuple[str, str]:
         email = os.getenv(email_key)
         password = os.getenv(password_key)
 
@@ -60,8 +62,9 @@ class LoginPage(BasePage):
         self.login(email, password)
 
     def login_as_simple_user(self):
-        email, password = self.get_credentials(email_key="SIMPLE_USER_EMAIL",
-                                               password_key="SIMPLE_USER_PASSWORD")
+        email, password = self.get_credentials(
+            email_key="SIMPLE_USER_EMAIL", password_key="SIMPLE_USER_PASSWORD"
+        )
 
         self.open_login_modal()
         self.login(email, password)

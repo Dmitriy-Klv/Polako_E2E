@@ -38,8 +38,12 @@ class EventsListPage(BasePage):
     def get_all_event_titles(self):
         return self.page.locator(EVENT_TITLE).all_inner_texts()
 
-    def create_event_btn_is_visible(self, timeout: int = 20000):
-        self.page.locator(CREATE_EVENT_BTN).wait_for(state="visible", timeout=timeout)
+    def create_event_btn_is_visible(self, timeout: int = 10000) -> bool:
+        try:
+            self.page.locator(CREATE_EVENT_BTN).wait_for(state="visible", timeout=timeout)
+            return True
+        except:
+            return False
 
     def click_create_event_btn(self):
         self.page.locator(CREATE_EVENT_BTN).click()

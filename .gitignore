@@ -26,3 +26,5 @@ Thumbs.db
 /TP_Polako_E2E/tools/
 /TP_Polako_E2E/artifacts/
 /TP_Polako_E2E/pyproject.toml
+/allure-results/
+/report.html

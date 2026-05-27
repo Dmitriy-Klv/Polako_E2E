@@ -9,13 +9,6 @@ from playwright.sync_api import Page
 
 from TP_Polako_E2E.api.auth_api import AuthApi
 from TP_Polako_E2E.api.profile_api import ProfileApi
-from TP_Polako_E2E.pages.auth.login_page import LoginPage
-from TP_Polako_E2E.pages.common.header import HeaderPage
-from TP_Polako_E2E.pages.events.event_edit_page import EventEditPage
-from TP_Polako_E2E.pages.events.event_management_page import EventManagementPage
-from TP_Polako_E2E.pages.events.event_preview_page import EventPreviewPage
-from TP_Polako_E2E.pages.events.events_list_page import EventsListPage
-from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 
@@ -215,20 +208,22 @@ def api_auth_token(manager_api_token):
     return manager_api_token
 
 
-def _login_browser_with_token(app_page, token: str):
+def _authenticate_via_cookie(page, token: str):
     raw_url = os.getenv("STG_URL")
     parsed = urlparse(raw_url)
     clean_base_url = f"{parsed.scheme}://{parsed.netloc}"
     domain = parsed.netloc
 
-    app_page.context.add_cookies(
-        [{"name": "access_token", "value": token, "domain": domain, "path": "/"}]
-    )
-
-    target_url = f"{clean_base_url}/ru/user/personal-information"
-    app_page.goto(target_url)
-    app_page.wait_for_load_state("networkidle")
-    return app_page
+    page.context.add_cookies([
+        {
+            "name": "access_token",
+            "value": token,
+            "domain": domain,
+            "path": "/",
+        }
+    ])
+    page.goto(f"{clean_base_url}/ru/user/personal-information")
+    page.wait_for_load_state("networkidle")
 
 
 @pytest.fixture(scope="function")
@@ -238,12 +233,14 @@ def authorized_profile_api(api_auth_token, base_url):
 
 @pytest.fixture(scope="function")
 def user_page(app_page, user_api_token):
-    return _login_browser_with_token(app_page, user_api_token)
+    _authenticate_via_cookie(app_page, user_api_token)
+    return app_page
 
 
 @pytest.fixture(scope="function")
 def manager_page(app_page, manager_api_token):
-    return _login_browser_with_token(app_page, manager_api_token)
+    _authenticate_via_cookie(app_page, manager_api_token)
+    return app_page
 
 
 @pytest.fixture(scope="function")

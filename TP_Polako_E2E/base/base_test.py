@@ -1,6 +1,3 @@
-import os
-from urllib.parse import urlparse
-
 import pytest
 
 from TP_Polako_E2E.pages.auth.forgot_password_page import ForgotPasswordPage
@@ -51,35 +48,14 @@ class BaseTest:
         self.checkout_page = CheckoutPage(app_page)
         self.payment_gateway_page = PaymentGatewayPage(app_page)
 
-    def _authenticate_via_cookie(self, token: str):
-        raw_url = os.getenv("STG_URL")
-        parsed = urlparse(raw_url)
-        clean_base_url = f"{parsed.scheme}://{parsed.netloc}"
-        domain = parsed.netloc
-
-        self.page.context.add_cookies(
-            [
-                {
-                    "name": "access_token",
-                    "value": token,
-                    "domain": domain,
-                    "path": "/",
-                }
-            ]
-        )
-        self.page.goto(f"{clean_base_url}/ru/user/personal-information")
-        self.page.wait_for_load_state("networkidle")
-
-        return self.user_profile
-
 
 class BaseManagerTest(BaseTest):
     @pytest.fixture(autouse=True)
-    def auto_manager_login(self, setup_pages, manager_api_token):
-        self._authenticate_via_cookie(manager_api_token)
+    def auto_manager_login(self, setup_pages, manager_page):
+        self.page = manager_page
 
 
 class BaseUserTest(BaseTest):
     @pytest.fixture(autouse=True)
-    def auto_user_login(self, setup_pages, user_api_token):
-        self._authenticate_via_cookie(user_api_token)
+    def auto_user_login(self, setup_pages, user_page):
+        self.page = user_page

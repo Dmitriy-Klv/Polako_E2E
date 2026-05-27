@@ -1,4 +1,4 @@
-from utils.constants import (
+from TP_Polako_E2E.utils.constants import (
     EVENT_COST,
     EVENT_DESCRIPTION,
     EVENT_DURATION,

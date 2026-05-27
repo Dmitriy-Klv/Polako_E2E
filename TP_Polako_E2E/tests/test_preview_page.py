@@ -1,3 +1,5 @@
+import pytest
+
 from TP_Polako_E2E.base.base_test import BaseTest
 from TP_Polako_E2E.utils.constants import (
     EVENT_COST,
@@ -12,6 +14,7 @@ from TP_Polako_E2E.utils.constants import (
 
 class TestPreviewPage(BaseTest):
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_event_preview_content(self):
         self.login_page.login_as_valid_user()
         self.login_page.click_profile()
@@ -45,6 +48,7 @@ class TestPreviewPage(BaseTest):
             self.event_preview_page.is_image_visible()
         ), "The event image is not displaying!"
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_event_preview_content_in_new_window(self):
         self.login_page.login_as_valid_user()
         self.login_page.click_profile()

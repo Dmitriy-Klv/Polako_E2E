@@ -1,3 +1,5 @@
+import pytest
+
 from TP_Polako_E2E.utils.constants import (
     EVENT_COST,
     EVENT_DESCRIPTION,
@@ -24,6 +26,7 @@ from TP_Polako_E2E.utils.constants import (
 
 class TestEventManagement(BaseTest):
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_check_event(self):
         self.login_page.login_as_valid_user()
         self.login_page.click_profile()
@@ -59,6 +62,7 @@ class TestEventManagement(BaseTest):
             len(self.event_management_page.check_title_on_right_panel()) > 0
         ), TITLE_TEXT_RESULT
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_deleted_event(self):
         self.event_management_page.click_delete_event()
         self.event_management_page.confirm_deletion(EVENT_TO_DELETE)

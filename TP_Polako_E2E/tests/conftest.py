@@ -94,7 +94,7 @@ def browser_type_launch_args(
             "HEADLESS",
             "false",
         ).lower()
-        == "true",  # true
+        == "false",  # true
     }
 
 

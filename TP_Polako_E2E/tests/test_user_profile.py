@@ -137,17 +137,16 @@ class TestUserProfile(BaseUserTest):
             expected_status=None,
         )
 
-        error_message = user_profile_page.page.locator(
-            ".error-message-selector"
-        ).text_content()
         error_message = self.user_profile.page.locator(".error-message-selector").text_content()
         assert "The passwords do not match!" in error_message
 
     def test_empty_password_submission_error(self):
         self.user_profile.click_profile_btn()
 
-        user_profile_page.change_password(
+        self.user_profile.change_password(
             new_pass="", confirm_pass="", expected_status=None
+        )
+
         self.user_profile.change_password(
             new_pass=INVALID_NEW_PASSWORD,
             confirm_pass=INVALID_NEW_PASSWORD,

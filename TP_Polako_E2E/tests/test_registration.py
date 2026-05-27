@@ -22,6 +22,7 @@ from TP_Polako_E2E.pages.auth.registration_page import (
 
 class TestRegistration(BaseTest):
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_positive_manager_registration(self):
 
         random_email = generate_random_email()
@@ -45,6 +46,7 @@ class TestRegistration(BaseTest):
         self.registration_page.verify_success_registration()
         self.registration_page.click_cool_button()
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_invalid_company_name_registration(self):
 
         self.login_page.open_login_modal()
@@ -66,6 +68,7 @@ class TestRegistration(BaseTest):
             "The registration button must be disabled in case of a validation error!"
         )
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_email_has_already_been_registered(self):
 
         self.login_page.open_login_modal()

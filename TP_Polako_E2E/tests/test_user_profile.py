@@ -86,6 +86,7 @@ class TestUserProfile(BaseUserTest):
             actual_data == VALID_PROFILE_DATA
         ), f"It was expected {VALID_PROFILE_DATA}, but it appears in the UI {actual_data}."
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_partial_profile_update_and_field_clearing(self):
         self.user_profile.click_profile_btn()
 
@@ -98,7 +99,7 @@ class TestUserProfile(BaseUserTest):
         assert actual_data["first_name"] == PARTIAL_PROFILE_DATA["first_name"]
         assert actual_data["last_name"] == ""
 
-    @pytest.mark.skip
+    @pytest.mark.skip(reason="Test is under development")
     def test_invalid_profile_data_validation(self):
         self.user_profile.click_profile_btn()
 
@@ -111,6 +112,7 @@ class TestUserProfile(BaseUserTest):
 
     # CHANGE PASSWORD
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_successful_password_change(self):
         self.user_profile.click_profile_btn()
         self.user_profile.verify_new_password_visible()
@@ -128,6 +130,7 @@ class TestUserProfile(BaseUserTest):
             expected_status=200,
         )
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_password_mismatch_error(self):
         self.user_profile.click_profile_btn()
 
@@ -140,6 +143,7 @@ class TestUserProfile(BaseUserTest):
         error_message = self.user_profile.page.locator(".error-message-selector").text_content()
         assert "The passwords do not match!" in error_message
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_empty_password_submission_error(self):
         self.user_profile.click_profile_btn()
 

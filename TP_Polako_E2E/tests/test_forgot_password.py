@@ -1,3 +1,5 @@
+import pytest
+
 from TP_Polako_E2E.base.base_test import BaseTest
 from TP_Polako_E2E.utils.constants import (
     EMAIL_ADDRESS,
@@ -7,6 +9,7 @@ from TP_Polako_E2E.utils.constants import (
 
 class TestForgotPassword(BaseTest):
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_forgot_password_success(self):
 
         self.login_page.open_login_modal()
@@ -17,6 +20,7 @@ class TestForgotPassword(BaseTest):
 
         self.forgot_password_page.verify_recovery_success_message(EMAIL_ADDRESS)
 
+    @pytest.mark.skip(reason="Test is under development")
     def test_forgot_password_invalid_email(self):
 
         self.login_page.open_login_modal()

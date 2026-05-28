@@ -90,6 +90,9 @@ def generate_random_password(length: int = 12) -> str:
     characters = string.ascii_letters + string.digits + string.punctuation
     password = "".join(random.choice(characters) for i in range(length))
     return password
+
+
+
 VALID_PROFILE_DATA = {
     "first_name": "Ramses",
     "last_name": "Fourth",

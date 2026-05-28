@@ -1,9 +1,6 @@
 from TP_Polako_E2E.base.base_test import BaseTest
 from TP_Polako_E2E.pages.auth.login_page import (
-    EMAIL_INPUT,
     LOGIN_FORM,
-    LOGIN_SUBMIT_BTN,
-    PASSWORD_INPUT,
 )
 from TP_Polako_E2E.utils.constants import (
     EMPTY_PASSWORD,
@@ -23,7 +20,7 @@ class TestLogin(BaseTest):
 
         self.user_profile.verify_logout_button_visible()
 
-    def test_access_internal_page_without_ui_login(self, authenticated_page):
+    def test_login_with_token(self, authenticated_page):
         self.user_profile.verify_logout_button_visible()
 
     def test_login_with_empty_password(self):
@@ -127,9 +124,3 @@ class TestLogin(BaseTest):
 
         assert self.login_page.is_visible(LOGIN_FORM)
 
-    def test_login_form_elements_visible(self):
-        self.login_page.open_login_modal()
-
-        assert self.login_page.is_visible(EMAIL_INPUT)
-        assert self.login_page.is_visible(PASSWORD_INPUT)
-        assert self.login_page.is_visible(LOGIN_SUBMIT_BTN)

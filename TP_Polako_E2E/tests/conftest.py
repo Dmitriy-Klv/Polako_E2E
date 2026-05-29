@@ -16,7 +16,6 @@ load_dotenv(ROOT_DIR / ".env")
 
 ENVIRONMENTS = {
     "stg": os.getenv("STG_URL"),
-    "prod": os.getenv("PROD_URL"),
 }
 
 missing = [name for name, value in ENVIRONMENTS.items() if not value]
@@ -46,7 +45,7 @@ def pytest_addoption(parser):
         "--env",
         action="store",
         default="stg",
-        help="Environment: stg/prod",
+        help="Environment: stg",
     )
 
 

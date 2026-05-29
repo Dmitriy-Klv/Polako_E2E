@@ -2,7 +2,9 @@ name: Playwright E2E Tests
 
 on:
   pull_request:
-    branches: [ develop, master ]
+    branches:
+      - develop
+      - master
 
 jobs:
   test:
@@ -39,7 +41,8 @@ jobs:
           SIMPLE_USER_PASSWORD: ${{ secrets.SIMPLE_USER_PASSWORD }}
           HEADLESS: "true"
           PYTHONPATH: ${{ github.workspace }}
-          stg: "true"      # ← добавили
+          stg: "true"
+          prod: "false"
 
         run: pytest TP_Polako_E2E/tests --env stg -v --tb=no
 

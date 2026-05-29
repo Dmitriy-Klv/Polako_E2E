@@ -1,3 +1,4 @@
+import re
 from playwright.sync_api import Page, Response, expect
 
 
@@ -33,7 +34,8 @@ class BasePage:
         self.page.locator(locator).scroll_into_view_if_needed()
 
     def expect_url(self, url_part: str):
-        expect(self.page).to_have_url(lambda url: url_part in url)
+        # expect(self.page).to_have_url(lambda url: url_part in url)
+        expect(self.page).to_have_url(re.compile(f".*{re.escape(url_part)}.*"), timeout=5000)
 
     def wait_for_network_stable(self):
         self.page.wait_for_load_state("networkidle")

@@ -42,7 +42,11 @@ jobs:
           HEADLESS: "true"
           PYTHONPATH: ${{ github.workspace }}
 
-        run: pytest TP_Polako_E2E/tests --env stg -v --tb=no
+        run: |
+          pytest TP_Polako_E2E/tests \
+            --env stg \
+            -v \
+            --tb=short
 
       - name: Upload Test Artifacts
         if: always()

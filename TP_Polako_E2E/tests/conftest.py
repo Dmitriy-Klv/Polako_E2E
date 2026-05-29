@@ -18,7 +18,10 @@ ENVIRONMENTS = {
     "stg": os.getenv("STG_URL"),
 }
 
-missing = [name for name, value in ENVIRONMENTS.items() if not value]
+missing = []
+for env_name, url in ENVIRONMENTS.items():
+    if not url:
+        missing.append(f"{env_name} (STG_URL)")
 
 if missing:
     raise RuntimeError(f"Missing env variables: {', '.join(missing)}")

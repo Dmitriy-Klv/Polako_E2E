@@ -2,9 +2,7 @@ name: Playwright E2E Tests
 
 on:
   pull_request:
-    branches:
-      - develop
-      - master
+    branches: [ develop, master ]
 
 jobs:
   test:
@@ -41,7 +39,9 @@ jobs:
           SIMPLE_USER_PASSWORD: ${{ secrets.SIMPLE_USER_PASSWORD }}
           HEADLESS: "true"
           PYTHONPATH: ${{ github.workspace }}
-        run: pytest TP_Polako_E2E/tests --env stg -v
+          stg: "true"      # ← добавили
+
+        run: pytest TP_Polako_E2E/tests --env stg -v --tb=no
 
       - name: Upload Test Artifacts
         if: always()
@@ -50,4 +50,3 @@ jobs:
           name: playwright-artifacts
           path: TP_Polako_E2E/artifacts/
           retention-days: 7
-

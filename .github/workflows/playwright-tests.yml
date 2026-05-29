@@ -10,6 +10,7 @@ jobs:
   test:
     name: Run E2E Tests
     runs-on: ubuntu-latest
+    environment: stg
 
     steps:
       - name: Checkout repository

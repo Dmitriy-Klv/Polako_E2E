@@ -233,14 +233,12 @@ def authorized_profile_api(api_auth_token, base_url):
 
 @pytest.fixture(scope="function")
 def user_page(app_page, user_api_token):
-    _authenticate_via_cookie(app_page, user_api_token)
-    return app_page
+    return _authenticate_via_cookie(app_page, user_api_token)
 
 
 @pytest.fixture(scope="function")
 def manager_page(app_page, manager_api_token):
-    _authenticate_via_cookie(app_page, manager_api_token)
-    return app_page
+    return _authenticate_via_cookie(app_page, manager_api_token)
 
 
 @pytest.fixture(scope="function")

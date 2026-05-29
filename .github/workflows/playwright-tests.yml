@@ -11,10 +11,6 @@ jobs:
     name: Run E2E Tests
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: TP_Polako_E2E
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,7 +25,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r TP_Polako_E2E/requirements.txt
 
       - name: Ensure Playwright is installed
         run: pip install playwright
@@ -45,13 +41,14 @@ jobs:
           SIMPLE_USER_EMAIL: ${{ secrets.SIMPLE_USER_EMAIL }}
           SIMPLE_USER_PASSWORD: ${{ secrets.SIMPLE_USER_PASSWORD }}
           HEADLESS: "true"
-          PYTHONPATH: ..
-        run: pytest -v --env stg
+          PYTHONPATH: ${{ github.workspace }}
+        run: pytest TP_Polako_E2E/tests --env stg -v
 
       - name: Upload Test Artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-artifacts
-          path: artifacts/
+          path: TP_Polako_E2E/artifacts/
           retention-days: 7
+

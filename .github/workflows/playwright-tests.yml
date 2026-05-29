@@ -1,18 +1,21 @@
 name: Playwright E2E Tests
 
 on:
+  workflow_dispatch:
   push:
     branches:
-      - '**'
+      - master
+      - develop
   pull_request:
     branches:
-      - develop
       - master
+      - develop
 
 jobs:
   test:
     name: Run E2E Tests
     runs-on: ubuntu-latest
+    if: vars.ENABLE_CI == 'true'
 
     steps:
       - name: Checkout repository

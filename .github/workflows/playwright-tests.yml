@@ -56,7 +56,7 @@ jobs:
           HEADLESS: "true"
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          xvfb-run pytest TP_Polako_E2E/tests \
+          xvfb-run --auto-servernum pytest TP_Polako_E2E/tests \
             --env stg \
             -v \
             --tb=short

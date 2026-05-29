@@ -16,10 +16,12 @@ load_dotenv(ROOT_DIR / ".env")
 
 ENVIRONMENTS = {
     "stg": os.getenv("STG_URL"),
-    "prod": os.getenv("PROD_URL"),
 }
 
-missing = [name for name, value in ENVIRONMENTS.items() if not value]
+missing = []
+for env_name, url in ENVIRONMENTS.items():
+    if not url:
+        missing.append(f"{env_name} (STG_URL)")
 
 if missing:
     raise RuntimeError(f"Missing env variables: {', '.join(missing)}")
@@ -46,7 +48,7 @@ def pytest_addoption(parser):
         "--env",
         action="store",
         default="stg",
-        help="Environment: stg/prod",
+        help="Environment: stg",
     )
 
 
@@ -88,6 +90,7 @@ def browser_type_launch_args(
             "false",
         ).lower()
         == "false",  # true <-
+        == "false",  # true -<
     }
 
 

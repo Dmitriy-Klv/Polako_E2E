@@ -33,9 +33,10 @@ EXPECTED_MARKERS = {
 
 # LoginPage
 
+INVALID_EMAIL_WITHOUT_AT = "test3mail.com"
 TEST_EMAIL = "test3@mail.com"
 INVALID_PASSWORD = "WrongPassword123"
-UNREGISTERED_EMAIL = "not_exist@test.com"
+INVALID_EMAIL = "not_exist@test.com"
 VALID_TEST_PASSWORD = "Password123"
 SQL_INJECTION_PAYLOAD = "' OR 1=1 --"
 XSS_PAYLOAD = "<script>alert(1)</script>"

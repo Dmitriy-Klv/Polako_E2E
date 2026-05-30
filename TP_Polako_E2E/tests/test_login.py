@@ -7,9 +7,10 @@ from TP_Polako_E2E.utils.constants import (
     INVALID_PASSWORD,
     SQL_INJECTION_PAYLOAD,
     TEST_EMAIL,
-    UNREGISTERED_EMAIL,
+    INVALID_EMAIL,
     VALID_TEST_PASSWORD,
     XSS_PAYLOAD,
+    INVALID_EMAIL_WITHOUT_AT,
 )
 
 
@@ -26,8 +27,7 @@ class TestLogin(BaseTest):
     def test_login_with_empty_password(self):
         self.login_page.open_login_modal()
         self.login_page.fill_login_form(
-            TEST_EMAIL,
-            EMPTY_PASSWORD,
+            TEST_EMAIL
         )
 
         assert self.login_page.is_login_button_disabled()
@@ -43,7 +43,7 @@ class TestLogin(BaseTest):
         self.login_page.open_login_modal()
 
         self.login_page.login(
-            UNREGISTERED_EMAIL,
+            INVALID_EMAIL,
             VALID_TEST_PASSWORD,
         )
 
@@ -53,7 +53,7 @@ class TestLogin(BaseTest):
         self.login_page.open_login_modal()
 
         self.login_page.login(
-            TEST_EMAIL,
+            INVALID_EMAIL_WITHOUT_AT,
             VALID_TEST_PASSWORD,
         )
 

@@ -81,9 +81,12 @@ class LoginPage(BasePage):
     def is_login_button_disabled(self) -> bool:
         return self.page.locator(LOGIN_SUBMIT_BTN).is_disabled()
 
-    def fill_login_form(self, email: str, password: str):
-        self.page.locator(EMAIL_INPUT).fill(email)
-        self.page.locator(PASSWORD_INPUT).fill(password)
+    def fill_login_form(self, email: str = None, password: str = None):
+        if email is not None:
+            self.page.locator(EMAIL_INPUT).fill(email)
+
+        if password is not None:
+            self.page.locator(PASSWORD_INPUT).fill(password)
 
     def click_forgot_password(self):
         self.page.locator(FORGOT_PASSWORD_LINK).click()

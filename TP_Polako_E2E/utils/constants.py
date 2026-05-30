@@ -33,7 +33,10 @@ EXPECTED_MARKERS = {
 
 # LoginPage
 
+INVALID_EMAIL_WITHOUT_AT = "test3mail.com"
 TEST_EMAIL = "test3@mail.com"
+INVALID_PASSWORD = "WrongPassword123"
+INVALID_EMAIL = "not_exist@test.com"
 
 UNREGISTERED_EMAIL = "not_exist@test.com"
 VALID_TEST_PASSWORD = "Password123"

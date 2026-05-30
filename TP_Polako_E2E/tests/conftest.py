@@ -89,6 +89,7 @@ def browser_type_launch_args(
             "HEADLESS",
             "false",
         ).lower()
+        == "false",  # true <-
         == "false",  # true -<
     }
 

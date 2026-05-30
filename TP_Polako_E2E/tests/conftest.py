@@ -90,7 +90,6 @@ def browser_type_launch_args(
             "false",
         ).lower()
         == "false",  # true <-
-        == "false",  # true -<
     }
 
 

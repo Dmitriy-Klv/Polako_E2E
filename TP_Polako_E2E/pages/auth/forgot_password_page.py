@@ -17,10 +17,14 @@ class ForgotPasswordPage(BasePage):
         self.click(SEND_BTN)
 
     def verify_recovery_success_message(self, email: str):
-        self.verify_element_is_visible(SUCCESS_MODAL_TEXT, f"{SUCCESS_MODAL_TEXT} {email}")
+        self.verify_element_is_visible(
+            SUCCESS_MODAL_TEXT, f"{SUCCESS_MODAL_TEXT} {email}"
+        )
 
     def verify_email_format_error_message(self):
-        self.verify_element_is_visible(EMAIL_FORMAT_ERROR_LOCATOR, EXPECTED_EMAIL_FORMAT_ERROR_MESSAGE)
+        self.verify_element_is_visible(
+            EMAIL_FORMAT_ERROR_LOCATOR, EXPECTED_EMAIL_FORMAT_ERROR_MESSAGE
+        )
 
     def verify_recovery_page_is_displayed(self):
         self.verify_element_is_visible(RECOVERY_TITLE)

@@ -34,7 +34,7 @@ EXPECTED_MARKERS = {
 # LoginPage
 
 TEST_EMAIL = "test3@mail.com"
-INVALID_PASSWORD = "WrongPassword123"
+
 UNREGISTERED_EMAIL = "not_exist@test.com"
 VALID_TEST_PASSWORD = "Password123"
 SQL_INJECTION_PAYLOAD = "' OR 1=1 --"
@@ -59,16 +59,11 @@ EVENT_TO_DELETE = EVENT_NAME
 ROOT_DIR = Path(__file__).resolve().parent.parent
 IMAGE_PATH = ROOT_DIR / "test_data" / "test_events_foto.png"
 TITLE_TEXT_RESULT = "The event title is empty."
-EXPECTED_EMAIL_FORMAT_ERROR_MESSAGE = (
-    "При обновлении пароля произошла ошибка. Попробуйте еще раз."
-)
+EXPECTED_EMAIL_FORMAT_ERROR_MESSAGE = "При обновлении пароля произошла ошибка. Попробуйте еще раз."
 TEST_NAME = "test_name"
 VALID_COMPANY_NAME = "Valid Company Name"
 LONG_COMPANY_NAME = "A" * 101
 EXPECTED_ERROR_TEXT_COMPANY_NAME = "Ошибка: Максимальная длина 100 символов"
-COMPANY_REGISTRATION_SUCCESS_MESSAGE = "Компания зарегистрирована"
-COOL_BTN_TEXT = "Круто"
-SUCCESS_MODAL_MESSAGE = "Информация для смены пароля отправлена на"
 
 
 def generate_random_email(domain: str = "test.com") -> str:
@@ -90,7 +85,6 @@ def generate_random_password(length: int = 12) -> str:
     characters = string.ascii_letters + string.digits + string.punctuation
     password = "".join(random.choice(characters) for i in range(length))
     return password
-
 
 
 VALID_PROFILE_DATA = {
@@ -124,9 +118,30 @@ INVALID_PROFILE_DATA = {
     "instagram": """Пейзик!([#}{2@'%"/|^34*.,`~""",
     "telegram": "ауцтсту.92ьх3ь-!смзц@",
 }
-
+# TODO: add please your new "INVALID_NEW_PASSWORD" in general list "INVALID_PASSWORD"
 VALID_NEW_PASSWORD = "t1T!k@cK%"
 INVALID_NEW_PASSWORD = ""
 
 VALID_NEW_PASSWORD = 't1T!k@cK%'
 INVALID_NEW_PASSWORD = ''
+
+INVALID_PASSWORD = [
+    "WrongPassword123",
+    "OR 1=1; DROP TABLE users;",
+    "<script>alert(1)</script>",
+    "Passمرحبا123שלוםword",
+    "${jndi:ldap://127.0.0.1/a}",
+    "%s%s%s%s%s%s%s%s%s%s%s%n%d" * 500,
+]
+
+random_email = generate_random_email()
+random_user_name = generate_random_user_name()
+random_company_name = generate_random_company_name()
+random_password = generate_random_password()
+
+VALID_RANDOM_USERS_DATA = [
+    random_email,
+    random_user_name,
+    random_company_name,
+    random_password,
+]

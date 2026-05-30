@@ -34,7 +34,7 @@ class TestLogin(BaseTest):
 
     def test_login_with_invalid_password(self):
         self.login_page.open_login_modal()
-        self.login_page.fill_login_form(TEST_EMAIL, INVALID_PASSWORD)
+        self.login_page.fill_login_form(TEST_EMAIL, INVALID_PASSWORD[0])
         self.login_page.click_login_button()
 
         self.login_page.verify_error_message()

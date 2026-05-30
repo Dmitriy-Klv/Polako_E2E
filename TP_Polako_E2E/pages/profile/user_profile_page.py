@@ -181,7 +181,9 @@ class UserProfilePage(BasePage):
     def click_change_password(self):
         self.page.locator(CHANGE_PASSWORD_BTN).click()
 
-    def change_password(self, new_pass: str, confirm_pass: str, expected_status: int | None = 200):
+    def change_password(
+        self, new_pass: str, confirm_pass: str, expected_status: int | None = 200
+    ):
         if new_pass is not None:
             self.fill_new_password(new_pass)
         if confirm_pass is not None:
@@ -192,18 +194,20 @@ class UserProfilePage(BasePage):
             return None
 
         with self.page.expect_response(
-                lambda response: "password" in response.url,
-                timeout=10000
+            lambda response: "password" in response.url, timeout=10000
         ) as response_info:
             self.click_change_password()
 
         actual_status = response_info.value.status
 
         if expected_status == 200:
-            assert actual_status in [200, 204], \
-                f"A successful password reset was expected, but the backend returned a code: {actual_status}"
+            assert actual_status in [
+                200,
+                204,
+            ], f"A successful password reset was expected, but the backend returned a code: {actual_status}"
         else:
-            assert actual_status == expected_status, \
-                f"An error code was expected {expected_status}, but the backend returned a code: {actual_status}"
+            assert (
+                actual_status == expected_status
+            ), f"An error code was expected {expected_status}, but the backend returned a code: {actual_status}"
 
         return response_info.value

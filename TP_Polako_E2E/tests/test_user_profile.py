@@ -108,7 +108,9 @@ class TestUserProfile(BaseUserTest):
 
         self.page.reload()
         actual_data = self.user_profile.get_all_profile_values()
-        assert actual_data != INVALID_PROFILE_DATA, "The system saved critically invalid data!"
+        assert (
+            actual_data != INVALID_PROFILE_DATA
+        ), "The system saved critically invalid data!"
 
     # CHANGE PASSWORD
 
@@ -140,7 +142,9 @@ class TestUserProfile(BaseUserTest):
             expected_status=None,
         )
 
-        error_message = self.user_profile.page.locator(".error-message-selector").text_content()
+        error_message = self.user_profile.page.locator(
+            ".error-message-selector"
+        ).text_content()
         assert "The passwords do not match!" in error_message
 
     @pytest.mark.skip(reason="Test is under development")
@@ -154,7 +158,7 @@ class TestUserProfile(BaseUserTest):
         self.user_profile.change_password(
             new_pass=INVALID_NEW_PASSWORD,
             confirm_pass=INVALID_NEW_PASSWORD,
-            expected_status=None
+            expected_status=None,
         )
 
         assert self.user_profile.page.is_disabled("button.change-password-submit")

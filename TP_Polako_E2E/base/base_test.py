@@ -13,6 +13,7 @@ from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
 from TP_Polako_E2E.pages.ticket.checkout_page import CheckoutPage
 from TP_Polako_E2E.pages.ticket.payment_gateway_page import PaymentGatewayPage
 from TP_Polako_E2E.pages.ticket.ticket_selection_page import TicketSelectionPage
+from TP_Polako_E2E.pages.common.footer import FooterPage
 
 
 class BaseTest:
@@ -30,6 +31,7 @@ class BaseTest:
     ticket_selection_page: TicketSelectionPage
     checkout_page: CheckoutPage
     payment_gateway_page: PaymentGatewayPage
+    footer_page: FooterPage
 
     @pytest.fixture(autouse=True)
     def setup_pages(self, app_page):
@@ -47,6 +49,7 @@ class BaseTest:
         self.ticket_selection_page = TicketSelectionPage(app_page)
         self.checkout_page = CheckoutPage(app_page)
         self.payment_gateway_page = PaymentGatewayPage(app_page)
+        self.footer_page = FooterPage(app_page)
 
 
 class BaseManagerTest(BaseTest):

@@ -1,4 +1,5 @@
 import os
+import re
 import string
 
 from pathlib import Path
@@ -125,9 +126,6 @@ INVALID_PROFILE_DATA = {
 VALID_NEW_PASSWORD = "t1T!k@cK%"
 INVALID_NEW_PASSWORD = ""
 
-VALID_NEW_PASSWORD = 't1T!k@cK%'
-INVALID_NEW_PASSWORD = ''
-
 INVALID_PASSWORD = [
     "WrongPassword123",
     "OR 1=1; DROP TABLE users;",
@@ -148,3 +146,7 @@ VALID_RANDOM_USERS_DATA = [
     random_company_name,
     random_password,
 ]
+
+HOME_PAGE_REGEXP = re.compile(r".*/(ru|sr|en)?(#events)?$")
+APP_STORE_REGEXP = re.compile(r"apps\.apple\.com/.*/app/polako-hedonist/id6745751830")
+GOOGLE_PLAY_REGEXP = re.compile(r"play\.google\.com/store/apps/details\?id=blue\.muffin\.polako\.client")

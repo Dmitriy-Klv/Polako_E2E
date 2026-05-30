@@ -1,4 +1,7 @@
+from playwright.sync_api import expect
+
 from TP_Polako_E2E.base.base_page import BasePage
+from TP_Polako_E2E.utils.constants import HOME_PAGE_REGEXP, APP_STORE_REGEXP, GOOGLE_PLAY_REGEXP
 
 FOOTER_LOGO = 'footer img[alt="logo"]'
 
@@ -44,6 +47,11 @@ class FooterPage(BasePage):
     def verify_logo_visible(self):
         self.page.locator(FOOTER_LOGO).wait_for(state="visible", timeout=5000)
 
+    def verify_logo_navigation(self):
+        self.verify_logo_visible()
+        self.click_logo()
+        expect(self.page).to_have_url(HOME_PAGE_REGEXP)
+
     # Mobile Apps
     def click_app_store(self):
         self.page.locator(APP_STORE_BTN).click()
@@ -56,6 +64,26 @@ class FooterPage(BasePage):
 
     def verify_google_play_visible(self):
         self.page.locator(GOOGLE_PLAY_BTN).wait_for(state="visible", timeout=4000)
+
+    def verify_app_store_redirection(self):
+        self.verify_app_store_visible()
+
+        with self.page.context.expect_page() as new_page_info:
+            self.click_app_store()
+
+        new_page = new_page_info.value
+        expect(new_page).to_have_url(APP_STORE_REGEXP)
+        new_page.close()
+
+    def verify_google_play_redirection(self):
+        self.verify_google_play_visible()
+
+        with self.page.context.expect_page() as new_page_info:
+            self.click_google_play()
+
+        new_page = new_page_info.value
+        expect(new_page).to_have_url(GOOGLE_PLAY_REGEXP)
+        new_page.close()
 
     # Navigation Links
     def click_nav_link(self, key_name: str):

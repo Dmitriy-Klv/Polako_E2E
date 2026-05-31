@@ -1,10 +1,12 @@
 import re
 from playwright.sync_api import Page, Response, expect
+from playwright.sync_api import expect
 
 
 class BasePage:
     def __init__(self, page: Page):
         self.page = page
+        self.expect = expect
 
     def open(self, url: str) -> Response | None:
         return self.page.goto(url)

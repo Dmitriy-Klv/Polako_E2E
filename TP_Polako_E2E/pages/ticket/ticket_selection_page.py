@@ -13,18 +13,14 @@ CART_TIMER = "span.bg-blue-100"
 
 class TicketSelectionPage(BasePage):
 
-    def select_test_ticket(self):
-        button = self.page.locator(ADD_SECOND_TICKET_BUTTON)
-        button.wait_for(state="visible", timeout=10000)
-        button.click()
+    def select_ticket(self, ticket_type: str):
+        selectors = {
+            "first": ADD_FIRTS_TICKET_BUTTON,
+            "second": ADD_SECOND_TICKET_BUTTON,
+            "third": ADD_THIRD_TICKET_BUTTON,
+        }
 
-    def select_testo123_ticket(self):
-        button = self.page.locator(ADD_FIRTS_TICKET_BUTTON)
-        button.wait_for(state="visible", timeout=10000)
-        button.click()
-
-    def select_test321_ticket(self):
-        button = self.page.locator(ADD_THIRD_TICKET_BUTTON)
+        button = self.page.locator(selectors[ticket_type])
         button.wait_for(state="visible", timeout=10000)
         button.click()
 
@@ -47,3 +43,7 @@ class TicketSelectionPage(BasePage):
     def assert_cart_timer_is_visible(self):
         timer_locator = self.page.locator(CART_TIMER).first
         expect(timer_locator).to_be_visible(timeout=10000)
+
+    def add_ticket_and_open_cart(self, ticket_type: str):
+        self.select_ticket(ticket_type)
+        self.open_cart()

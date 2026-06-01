@@ -38,41 +38,32 @@ jobs:
           pip install playwright
           playwright install --with-deps chromium
 
-      - name: Debug Secrets
-        env:
-          STG_URL: ${{ secrets.STG_URL }}
-          VALID_EMAIL: ${{ secrets.VALID_EMAIL }}
-          VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
+      - name: Diagnostic Step (Check Credentials Visibility)
         run: |
-          echo "=== DEBUG ==="
-
-          if [ -n "$STG_URL" ]; then
-            echo "STG_URL=SET"
-            echo "STG_URL_LENGTH=${#STG_URL}"
+          echo "=== GitHub Secret Check ==="
+          if [ -z "${{ secrets.STG_URL }}" ]; then
+            echo "❌ secrets.STG_URL is EMPTY or NOT ACCESSIBLE"
           else
-            echo "STG_URL=EMPTY"
+            echo "✅ secrets.STG_URL is populated"
           fi
-
-          if [ -n "$VALID_EMAIL" ]; then
-            echo "VALID_EMAIL=SET"
+          
+          echo "=== GitHub Variables Check ==="
+          if [ -z "${{ vars.STG_URL }}" ]; then
+            echo "ℹ️ vars.STG_URL is empty"
           else
-            echo "VALID_EMAIL=EMPTY"
+            echo "✅ vars.STG_URL is populated (Found in Variables tab!)"
           fi
-
-          python -c "import os; print('Python STG_URL:', repr(os.getenv('STG_URL')))"
 
       - name: Run Pytest
         env:
-          VALID_EMAIL: ${{ secrets.VALID_EMAIL }}
-          VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
-          STG_URL: ${{ secrets.STG_URL }}
-          SIMPLE_USER_EMAIL: ${{ secrets.SIMPLE_USER_EMAIL }}
-          SIMPLE_USER_PASSWORD: ${{ secrets.SIMPLE_USER_PASSWORD }}
+          VALID_EMAIL: ${{ secrets.VALID_EMAIL || vars.VALID_EMAIL }}
+          VALID_PASSWORD: ${{ secrets.VALID_PASSWORD || vars.VALID_PASSWORD }}
+          STG_URL: ${{ secrets.STG_URL || vars.STG_URL }}
+          SIMPLE_USER_EMAIL: ${{ secrets.SIMPLE_USER_EMAIL || vars.SIMPLE_USER_EMAIL }}
+          SIMPLE_USER_PASSWORD: ${{ secrets.SIMPLE_USER_PASSWORD || vars.SIMPLE_USER_PASSWORD }}
           HEADLESS: "true"
           PYTHONPATH: ${{ github.workspace }}
-        run: |
-          python -c "import os; print('Before pytest:', repr(os.getenv('STG_URL')))"
-          python -m pytest tests -v
+        run: python -m pytest tests -v
 
       - name: Upload Test Artifacts (Traces, Videos, Screenshots)
         if: always()

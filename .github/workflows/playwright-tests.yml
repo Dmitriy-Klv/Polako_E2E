@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
+    defaults:
+      run:
+        working-directory: TP_Polako_E2E
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,23 +34,24 @@ jobs:
           pip install -r requirements.txt
 
       - name: Install Playwright Browsers
-        run: playwright install --with-deps chromium
-
-      - name: Create .env file
         run: |
-          echo "VALID_EMAIL=${{ secrets.VALID_EMAIL }}" >> .env
-          echo "VALID_PASSWORD=${{ secrets.VALID_PASSWORD }}" >> .env
-          echo "STG_URL=${{ secrets.STG_URL }}" >> .env
-          echo "SIMPLE_USER_EMAIL=${{ secrets.SIMPLE_USER_EMAIL }}" >> .env
-          echo "SIMPLE_USER_PASSWORD=${{ secrets.SIMPLE_USER_PASSWORD }}" >> .env
+          pip install playwright
+          playwright install --with-deps chromium
 
       - name: Run Pytest
-        run: python -m pytest TP_Polako_E2E/tests -v
+        env:
+          VALID_EMAIL: ${{ secrets.VALID_EMAIL }}
+          VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
+          STG_URL: ${{ secrets.STG_URL }}
+          SIMPLE_USER_EMAIL: ${{ secrets.SIMPLE_USER_EMAIL }}
+          SIMPLE_USER_PASSWORD: ${{ secrets.SIMPLE_USER_PASSWORD }}
+          HEADLESS: "true"
+        run: python -m pytest tests -v
 
       - name: Upload Test Artifacts (Traces, Videos, Screenshots)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: playwright-artifacts
-          path: artifacts/
+          path: TP_Polako_E2E/artifacts/
           retention-days: 7

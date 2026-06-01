@@ -38,6 +38,16 @@ jobs:
           pip install playwright
           playwright install --with-deps chromium
 
+      - name: Verify Secrets (Safe Debug)
+        run: |
+          echo "=== Security & Env Verification ==="
+          if [ -z "${{ secrets.STG_URL }}" ]; then
+            echo "❌ CRITICAL WARNING: secrets.STG_URL is completely EMPTY in this runner context!"
+            echo "Reason: Check if this is a PR from a Fork or if secrets are placed in an Environment instead of Repository Secrets."
+          else
+            echo "✅ SUCCESS: secrets.STG_URL is recognized by GitHub Actions."
+          fi
+
       - name: Run Pytest
         env:
           VALID_EMAIL: ${{ secrets.VALID_EMAIL }}

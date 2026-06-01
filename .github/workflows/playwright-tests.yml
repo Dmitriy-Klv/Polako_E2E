@@ -1,6 +1,17 @@
 name: Playwright E2E Tests
 
 on:
+  push:
+    branches:
+      - develop
+      - master
+    paths:
+      - 'TP_Polako_E2E/**'
+      - '.github/workflows/playwright*'
+  pull_request:
+    branches:
+      - develop
+      - master
   workflow_dispatch:
 
 jobs:

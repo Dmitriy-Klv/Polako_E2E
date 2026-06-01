@@ -14,6 +14,8 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(ROOT_DIR / ".env")
 
+print("DEBUG STG_URL =", repr(os.getenv("STG_URL")))
+
 ENVIRONMENTS = {
     "stg": os.getenv("STG_URL"),
 }

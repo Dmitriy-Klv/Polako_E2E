@@ -85,13 +85,14 @@ def base_url(pytestconfig):
 def browser_type_launch_args(
     browser_type_launch_args,
 ):
+    if os.getenv("CI"):
+        headless_mode = True
+    else:
+        headless_mode = os.getenv("HEADLESS", "false").lower() == "false"  #true
+
     return {
         **browser_type_launch_args,
-        "headless": os.getenv(
-            "HEADLESS",
-            "false",
-        ).lower()
-        == "false",  # true <-
+        "headless": headless_mode,
     }
 
 

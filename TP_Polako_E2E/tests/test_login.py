@@ -47,10 +47,7 @@ class TestLogin(BaseTest):
         self.login_page.login(
 
             INVALID_EMAIL,
-            VALID_TEST_PASSWORD,
-
-            UNREGISTERED_EMAIL,
-            VALID_TEST_PASSWORD[0],
+            VALID_TEST_PASSWORD
         )
 
         self.login_page.verify_error_message()
@@ -63,9 +60,6 @@ class TestLogin(BaseTest):
             INVALID_EMAIL_WITHOUT_AT,
             VALID_TEST_PASSWORD,
 
-            TEST_EMAIL,
-            VALID_TEST_PASSWORD[0],
-
         )
 
         self.login_page.verify_error_message()
@@ -75,7 +69,7 @@ class TestLogin(BaseTest):
 
         self.login_page.login(
             "test@",
-            VALID_TEST_PASSWORD[0],
+            VALID_TEST_PASSWORD,
         )
 
         self.login_page.verify_error_message()
@@ -85,7 +79,7 @@ class TestLogin(BaseTest):
 
         self.login_page.login(
             "@gmail.com",
-            VALID_TEST_PASSWORD[0],
+            VALID_TEST_PASSWORD,
         )
 
         self.login_page.verify_error_message()
@@ -95,7 +89,7 @@ class TestLogin(BaseTest):
 
         self.login_page.login(
             "test.gmail.com",
-            VALID_TEST_PASSWORD[0],
+            VALID_TEST_PASSWORD,
         )
 
         self.login_page.verify_error_message()
@@ -105,7 +99,7 @@ class TestLogin(BaseTest):
 
         self.login_page.login(
             "test@com",
-            VALID_TEST_PASSWORD[0],
+            VALID_TEST_PASSWORD,
         )
 
         self.login_page.verify_error_message()

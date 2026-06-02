@@ -34,10 +34,14 @@ EXPECTED_MARKERS = {
 
 # LoginPage
 
+
 INVALID_EMAIL_WITHOUT_AT = "test3mail.com"
 TEST_EMAIL = "test3@mail.com"
 INVALID_PASSWORD = "WrongPassword123"
 INVALID_EMAIL = "not_exist@test.com"
+
+
+TEST_EMAIL = "test3@mail.com"
 
 UNREGISTERED_EMAIL = "not_exist@test.com"
 VALID_TEST_PASSWORD = "Password123"
@@ -52,7 +56,6 @@ INVALID_EMAILS = [
     "test.gmail.com",
     "test@com",
 ]
-
 
 EVENT_NAME = "test_event"
 EVENT_DESCRIPTION = "test_description"
@@ -90,7 +93,6 @@ def generate_random_password(length: int = 12) -> str:
     password = "".join(random.choice(characters) for i in range(length))
     return password
 
-
 VALID_PROFILE_DATA = {
     "first_name": "Ramses",
     "last_name": "Fourth",
@@ -100,7 +102,6 @@ VALID_PROFILE_DATA = {
     "telegram": "@ram4",
 }
 
-
 PARTIAL_PROFILE_DATA = {
     "first_name": "Привет",
     "last_name": "",
@@ -109,7 +110,6 @@ PARTIAL_PROFILE_DATA = {
     "instagram": "",
     "telegram": "@hello",
 }
-
 
 INVALID_PROFILE_DATA = {
     "first_name": "932c- mv3c kmf in0 \[w [wld][mcna]чьэцуст0ш3ьц0ч3 932c- mv3c kmf in0 \[w [wld][mcna]чьэцуст0ш3ьц0ч3",
@@ -123,8 +123,14 @@ INVALID_PROFILE_DATA = {
     "telegram": "ауцтсту.92ьх3ь-!смзц@",
 }
 
+
 VALID_NEW_PASSWORD = "t1T!k@cK%"
 INVALID_NEW_PASSWORD = ""
+
+
+
+VALID_NEW_PASSWORD = "t1T!k@cK%"
+
 
 INVALID_PASSWORD = [
     "WrongPassword123",
@@ -133,6 +139,7 @@ INVALID_PASSWORD = [
     "Passمرحبا123שלוםword",
     "${jndi:ldap://127.0.0.1/a}",
     "%s%s%s%s%s%s%s%s%s%s%s%n%d" * 500,
+    ""
 ]
 
 random_email = generate_random_email()

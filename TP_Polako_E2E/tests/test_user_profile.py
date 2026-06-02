@@ -7,7 +7,7 @@ from playwright.sync_api import expect
 
 from TP_Polako_E2E.base.base_test import BaseUserTest
 from TP_Polako_E2E.utils.constants import (
-    INVALID_NEW_PASSWORD,
+    INVALID_PASSWORD,
     INVALID_PROFILE_DATA,
     PARTIAL_PROFILE_DATA,
     VALID_NEW_PASSWORD,
@@ -171,8 +171,8 @@ class TestUserProfile(BaseUserTest):
         )
 
         self.user_profile.change_password(
-            new_pass=INVALID_NEW_PASSWORD,
-            confirm_pass=INVALID_NEW_PASSWORD,
+            new_pass=INVALID_PASSWORD[6],
+            confirm_pass=INVALID_PASSWORD[6],
             expected_status=None,
         )
 

@@ -51,7 +51,7 @@ class TestRegistration(BaseTest):
         self.login_page.open_login_modal()
         self.registration_page.for_organization_to_click()
         self.registration_page.fill_first_step_form(
-            TEST_EMAIL, VALID_TEST_PASSWORD, TEST_NAME
+            TEST_EMAIL, VALID_TEST_PASSWORD[0], TEST_NAME
         )
         self.registration_page.fill_company_name(VALID_COMPANY_NAME)
         self.registration_page.click_register()

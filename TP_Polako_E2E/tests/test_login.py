@@ -10,7 +10,7 @@ from TP_Polako_E2E.utils.constants import (
     INVALID_EMAIL,
     VALID_TEST_PASSWORD,
     XSS_PAYLOAD,
-    INVALID_EMAIL_WITHOUT_AT,
+    INVALID_EMAIL_WITHOUT_AT, UNREGISTERED_EMAIL,
 )
 
 
@@ -45,13 +45,12 @@ class TestLogin(BaseTest):
         self.login_page.open_login_modal()
 
         self.login_page.login(
-<<<<<<< Updated upstream
+
             INVALID_EMAIL,
             VALID_TEST_PASSWORD,
-=======
+
             UNREGISTERED_EMAIL,
             VALID_TEST_PASSWORD[0],
->>>>>>> Stashed changes
         )
 
         self.login_page.verify_error_message()
@@ -60,13 +59,13 @@ class TestLogin(BaseTest):
         self.login_page.open_login_modal()
 
         self.login_page.login(
-<<<<<<< Updated upstream
+
             INVALID_EMAIL_WITHOUT_AT,
             VALID_TEST_PASSWORD,
-=======
+
             TEST_EMAIL,
             VALID_TEST_PASSWORD[0],
->>>>>>> Stashed changes
+
         )
 
         self.login_page.verify_error_message()

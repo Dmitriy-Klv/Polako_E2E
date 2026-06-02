@@ -33,16 +33,16 @@ EXPECTED_MARKERS = {
 
 
 # LoginPage
-<<<<<<< Updated upstream
+
 
 INVALID_EMAIL_WITHOUT_AT = "test3mail.com"
 TEST_EMAIL = "test3@mail.com"
 INVALID_PASSWORD = "WrongPassword123"
 INVALID_EMAIL = "not_exist@test.com"
 
-=======
+
 TEST_EMAIL = "test3@mail.com"
->>>>>>> Stashed changes
+
 UNREGISTERED_EMAIL = "not_exist@test.com"
 VALID_TEST_PASSWORD = "Password123"
 SQL_INJECTION_PAYLOAD = "' OR 1=1 --"
@@ -122,16 +122,16 @@ INVALID_PROFILE_DATA = {
     "instagram": """Пейзик!([#}{2@'%"/|^34*.,`~""",
     "telegram": "ауцтсту.92ьх3ь-!смзц@",
 }
-<<<<<<< Updated upstream
+
 
 VALID_NEW_PASSWORD = "t1T!k@cK%"
 INVALID_NEW_PASSWORD = ""
 
-=======
+
 
 VALID_NEW_PASSWORD = "t1T!k@cK%"
 
->>>>>>> Stashed changes
+
 INVALID_PASSWORD = [
     "WrongPassword123",
     "OR 1=1; DROP TABLE users;",

@@ -1,4 +1,6 @@
 from TP_Polako_E2E.pages.profile.user_profile_page import UserProfilePage
+import re
+from playwright.sync_api import Page, expect
 
 TOP_WARNING_BANNER = "div.bg-amber-50"
 FILL_DATA_BTN = 'div.bg-amber-50 a[href*="contract-data"]'
@@ -110,3 +112,6 @@ class ManagerProfilePage(UserProfilePage):
                 modal.click()
         except:
             pass
+
+    def verify_profile_url(self):
+        expect(self.page).to_have_url(re.compile(r"/user/personal-information$"))

@@ -43,7 +43,7 @@ jobs:
       VALID_EMAIL: ${{ secrets.VALID_EMAIL }}
       VALID_PASSWORD: ${{ secrets.VALID_PASSWORD }}
       HEADLESS: "true"
-      PYTHONPATH: ${{ github.workspace }}/TP_Polako_E2E
+      PYTHONPATH: ${{ github.workspace }}
 
     steps:
       - name: Checkout repository

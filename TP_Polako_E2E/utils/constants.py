@@ -122,7 +122,7 @@ INVALID_PROFILE_DATA = {
     "instagram": """Пейзик!([#}{2@'%"/|^34*.,`~""",
     "telegram": "ауцтсту.92ьх3ь-!смзц@",
 }
-# TODO: add please your new "INVALID_NEW_PASSWORD" in general list "INVALID_PASSWORD"
+
 VALID_NEW_PASSWORD = "t1T!k@cK%"
 INVALID_NEW_PASSWORD = ""
 
